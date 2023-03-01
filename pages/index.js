@@ -1,4 +1,4 @@
-import { supabase } from './../lib/supabaseClient';
+import { supabase } from '../lib/supabaseClient';
 import Head from 'next/head'
 import { CssVarsProvider } from '@mui/joy/styles';
 import Button from '@mui/joy/Button';
@@ -13,7 +13,7 @@ export async function getServerSideProps() {
   }
 }
 
-export default function Home() {
+export default function Home({beers}) {
   return (
     <>
       <Head>
