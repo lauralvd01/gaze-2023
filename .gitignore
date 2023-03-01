@@ -30,4 +30,6 @@ yarn-error.log*
 
 # vercel
 .vercel
-lib/supabaseClient.js
+
+#lib
+/lib/
