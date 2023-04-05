@@ -57,10 +57,11 @@ export default function Layout({children}){
                     <div className="row">
                         <div className="col">
                             <div className='container'>
-                                <p> Projet recherche informatique </p>
-                                <p> Paul Cambon 2A depinfo</p>
-                                <p> Développement Web </p>
-                                <p> Réalisé au premier semestre 2023</p>
+                                <p> Projet software engineering </p>
+                                <p> Laura Levraud</p>
+                                <p> Simun Pauget</p>
+                                <p> Pierre-Atoine Lequeu</p>
+                                <p> Paul Cambon</p>
                             </div>
                         </div>
                         <div className="col">
@@ -68,11 +69,11 @@ export default function Layout({children}){
                                 <a className="navbar-brand" href="/">
                                     <p>Home</p>
                                 </a>
-                                <a className="navbar-brand" href="/simulator">
-                                    <p>Simulateur</p>
+                                <a className="navbar-brand" href="/loggin">
+                                    <p>Loggin</p>
                                 </a>
                                 <a className="navbar-brand" href="https://www.linkedin.com/in/paul-cambon54/">
-                                    <p>Linkedin</p>
+                                    <p>Github du projet</p>
                                 </a>
                                 <p> Merci pour votre visite, à bientôt !</p>
                             </div>
