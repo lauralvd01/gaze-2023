@@ -2,6 +2,7 @@ import { supabase } from '../lib/supabaseClient';
 import Head from 'next/head'
 import Layout from '../components/layout';
 
+export let taux = 0.5;
 
 export async function getServerSideProps() {
   let { data } = await supabase.from('beers').select()
@@ -24,6 +25,8 @@ export default function Home({beers}) {
       </Head>
       <main>
         <div className='container'>
+          <h3 class="d-flex justify-content-center">Tu es actuellement à {taux} g/L d'alcool dans le sang !</h3>
+
           <ul>
             {beers.map((beer) => (<li key={beer.id}>{beer.name}</li>))}
           </ul>
