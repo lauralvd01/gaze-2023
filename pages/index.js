@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { supabase } from '../lib/supabaseClient';
 import Head from 'next/head'
 
@@ -21,7 +23,8 @@ export default function Home({beers}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <p>Hello World</p>
+        <Link href="form" >
+        <p>I had a new drink</p></Link>
       <ul>
         {beers.map((beer) => (<li key={beer.id}>{beer.name}</li>))}
       </ul>
