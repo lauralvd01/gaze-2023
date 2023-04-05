@@ -1,19 +1,19 @@
-import { supabase } from '../lib/supabaseClient';
-import Head from 'next/head'
-import { CssVarsProvider } from '@mui/joy/styles';
-import Button from '@mui/joy/Button';
+import supabase from "../lib/supabaseClient";
+import Head from "next/head";
+import { CssVarsProvider } from "@mui/joy/styles";
+import Button from "@mui/joy/Button";
 
 export async function getServerSideProps() {
-  let { data } = await supabase.from('beers').select()
+  let { data } = await supabase.from("beers").select();
 
   return {
     props: {
-     beers: data
+      beers: data,
     },
-  }
+  };
 }
 
-export default function Home({beers}) {
+export default function Home({ beers }) {
   return (
     <>
       <Head>
@@ -23,13 +23,18 @@ export default function Home({beers}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-      <CssVarsProvider>
-        <Button variant="solid">Hello World</Button>
-      </CssVarsProvider>
-      <ul>
-        {beers.map((beer) => (<li key={beer.id}>{beer.name}</li>))}
-      </ul>
+        <CssVarsProvider>
+          <Button variant="solid" href="/auth">
+            Hello World
+          </Button>
+          <button href="/auth">test</button>
+        </CssVarsProvider>
+        <ul>
+          {beers.map((beer) => (
+            <li key={beer.id}>{beer.name}</li>
+          ))}
+        </ul>
       </main>
     </>
-  )
+  );
 }
