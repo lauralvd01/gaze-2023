@@ -35,7 +35,7 @@ export default function Layout({children}){
                                 </li>
                             </ul>
                         </div>
-                        <button type="button" class="btn btn-outline">Primary</button>
+                        <button type="button" class="btn loggin_button">Primary</button>
                     </div>
                 </nav>
             </header>
