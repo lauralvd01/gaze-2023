@@ -1,0 +1,17 @@
+main {
+    background-color: #283044;
+    color : #ebf5ee;
+}
+
+nav {
+    background-color: #f5bb00;
+}
+
+footer {
+    background-color: #1e2433;
+    color : #ebf5ee;
+}
+
+.container {
+    padding : 10px
+}

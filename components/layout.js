@@ -7,11 +7,11 @@ import Image from 'next/image';
 // import utilStyles from '../styles/utils.module.css';
 // import Link from 'next/link';
 
-export const siteTitle = 'Paul\'s research project';
+export const siteTitle = 'GazeEDIfication';
 
-export default function Layout({children, home}){
+export default function Layout({children}){
     return (
-        <div className="bg-light">
+        <>
             <Head>
                 {/* <link rel="icon" href="/favicon.ico" /> */}
                 <link rel="icon" href="/poland.png" />
@@ -22,9 +22,9 @@ export default function Layout({children, home}){
                 <nav className="navbar navbar-expand-lg bg-gradient shadow">
                     <div className="container-fluid">
                         <a className="navbar-brand" href="/">
-                            <Image src="/../public/images/artem.png" alt="Bootstrap" width="50" height="50"/>
+                            <Image src="/../public/images/artem.png" alt="PA=anus" width="50" height="50"/>
                         </a>
-                        <a className="navbar-brand" href="/">Projet recherche</a>
+                        <a className="navbar-brand" href="/">GazeEDIfication</a>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
@@ -50,7 +50,7 @@ export default function Layout({children, home}){
                     {children}
                 </div>
             </main>
-            <footer className='bg-gradient shadow'>
+            <footer className='shadow'>
                 <div className="container">
                     <div className="row">
                         <div className="col">
@@ -78,6 +78,6 @@ export default function Layout({children, home}){
                     </div>
                 </div>
             </footer>
-        </div>
+        </>
     );
 }
