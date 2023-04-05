@@ -8,6 +8,8 @@ import Image from 'next/image';
 // import Link from 'next/link';
 
 export const SITE_TITLE = 'GazEDIfication';
+import style from '@/styles/layout.module.css'
+
 
 export default function Layout({children}){
     return (
@@ -24,7 +26,11 @@ export default function Layout({children}){
                         <a className="navbar-brand pb-2" href="/">
                             <Image src="/../public/biere-petite.png" alt="PA=anus" width="50" height="50"/>
                         </a>
-                        <a className="navbar-brand" href="/">GazeEDIfication</a>
+                        <a className="navbar-brand" href="/">
+                            <span className={style.noir}>Gaz</span>
+                            <span className={style.jaune}>EDI</span>
+                            <span className={style.rouge}>fication</span>
+                        </a>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
