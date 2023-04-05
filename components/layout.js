@@ -35,7 +35,9 @@ export default function Layout({children}){
                                 </li>
                             </ul>
                         </div>
-                        <button type="button" class="btn loggin_button">Primary</button>
+                        <a href='/loggin'>
+                            <button type="button" className="btn loggin_button m-2">se connecter/créer un compte</button>
+                        </a>
                     </div>
                 </nav>
             </header>
