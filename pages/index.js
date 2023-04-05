@@ -1,7 +1,5 @@
 import { supabase } from '../lib/supabaseClient';
 import Head from 'next/head'
-import { CssVarsProvider } from '@mui/joy/styles';
-import Button from '@mui/joy/Button';
 
 export async function getServerSideProps() {
   let { data } = await supabase.from('beers').select()
@@ -23,9 +21,7 @@ export default function Home({beers}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-      <CssVarsProvider>
-        <Button variant="solid">Hello World</Button>
-      </CssVarsProvider>
+        <p>Hello World</p>
       <ul>
         {beers.map((beer) => (<li key={beer.id}>{beer.name}</li>))}
       </ul>
