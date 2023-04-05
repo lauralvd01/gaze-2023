@@ -7,7 +7,7 @@ import Image from 'next/image';
 // import utilStyles from '../styles/utils.module.css';
 // import Link from 'next/link';
 
-export const siteTitle = 'GazeEDIfication';
+export const SITE_TITLE = 'GazEDIfication';
 
 export default function Layout({children}){
     return (
@@ -15,7 +15,7 @@ export default function Layout({children}){
             <Head>
                 {/* <link rel="icon" href="/favicon.ico" /> */}
                 <link rel="icon" href="/poland.png" />
-                <meta name="og:title" content={siteTitle} />
+                <meta name="og:title" content={SITE_TITLE} />
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
             <header>
@@ -24,7 +24,7 @@ export default function Layout({children}){
                         <a className="navbar-brand pb-2" href="/">
                             <Image src="/../public/biere-petite.png" alt="PA=anus" width="50" height="50"/>
                         </a>
-                        <a className="navbar-brand" href="/">GazeEDIfication</a>
+                        <a className="navbar-brand" href="/">{SITE_TITLE}</a>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
