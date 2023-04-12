@@ -7,6 +7,7 @@ import Image from "next/image";
 // import Link from 'next/link';
 
 export const SITE_TITLE = "GazEDIfication";
+import style from "@/styles/layout.module.css";
 
 export default function Layout({ children }) {
   return (
@@ -29,7 +30,9 @@ export default function Layout({ children }) {
               />
             </a>
             <a className="navbar-brand" href="/">
-              GazeEDIfication
+              <span className={style.noir}>Gaz</span>
+              <span className={style.jaune}>EDI</span>
+              <span className={style.rouge}>fication</span>
             </a>
             <button
               className="navbar-toggler"
@@ -48,16 +51,18 @@ export default function Layout({ children }) {
                   <a
                     className="nav-link active"
                     aria-current="page"
-                    href="/auth"
+                    href="/simulator"
                   >
                     simulateur
                   </a>
                 </li>
               </ul>
             </div>
-            <button type="button" class="btn loggin_button">
-              Primary
-            </button>
+            <a href="/loggin">
+              <button type="button" className="btn loggin_button m-2">
+                se connecter/créer un compte
+              </button>
+            </a>
           </div>
         </nav>
       </header>
@@ -69,10 +74,11 @@ export default function Layout({ children }) {
           <div className="row">
             <div className="col">
               <div className="container">
-                <p> Projet recherche informatique </p>
-                <p> Paul Cambon 2A depinfo</p>
-                <p> Développement Web </p>
-                <p> Réalisé au premier semestre 2023</p>
+                <p> Projet software engineering </p>
+                <p> Laura Levraud</p>
+                <p> Simun Pauget</p>
+                <p> Pierre-Atoine Lequeu</p>
+                <p> Paul Cambon</p>
               </div>
             </div>
             <div className="col">
@@ -80,14 +86,14 @@ export default function Layout({ children }) {
                 <a className="navbar-brand" href="/">
                   <p>Home</p>
                 </a>
-                <a className="navbar-brand" href="/simulator">
-                  <p>Simulateur</p>
+                <a className="navbar-brand" href="/loggin">
+                  <p>Loggin</p>
                 </a>
                 <a
                   className="navbar-brand"
                   href="https://www.linkedin.com/in/paul-cambon54/"
                 >
-                  <p>Linkedin</p>
+                  <p>Github du projet</p>
                 </a>
                 <p> Merci pour votre visite, à bientôt !</p>
               </div>

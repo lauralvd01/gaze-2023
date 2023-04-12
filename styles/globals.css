@@ -16,6 +16,18 @@ footer {
     padding : 10px
 }
 
-.loggin_button {
-    background-color: black;
+.btn.loggin_button {
+    background-color: #f5bb00;
+    border-color: black;
+}
+
+.btn.loggin_button:hover {
+    background-color: #ffcb1f;
+    border-color: #1e2433;
+    color: #1e2433;
+}
+
+
+.container.logging-container {
+    max-width: 600px;
 }
