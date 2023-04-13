@@ -1,6 +1,7 @@
 import { supabase } from "../lib/supabaseClient";
 import Head from "next/head";
 import Layout from "../components/layout";
+import { useUser } from "@supabase/auth-helpers-react";
 
 export async function getServerSideProps() {
   let { data } = await supabase.from("beers").select();
@@ -13,6 +14,8 @@ export async function getServerSideProps() {
 }
 
 export default function Home({ beers }) {
+  const userSession = useUser();
+
   return (
     <Layout>
       <Head>
@@ -28,11 +31,13 @@ export default function Home({ beers }) {
       </Head>
       <main>
         <div className="container">
+          {userSession ? <div>Hello {userSession.id} </div> : null}
           <ul>
             {beers.map((beer) => (
               <li key={beer.id}>{beer.name}</li>
             ))}
           </ul>
+          <button onClick={() => console.log(userSession)}>test</button>
         </div>
       </main>
     </Layout>

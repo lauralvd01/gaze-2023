@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 
 // import Image from 'next/image';
 // import styles from './layout.module.css';
@@ -10,6 +11,9 @@ export const SITE_TITLE = "GazEDIfication";
 import style from "@/styles/layout.module.css";
 
 export default function Layout({ children }) {
+  const supabaseClient = useSupabaseClient();
+  const user = useUser();
+
   return (
     <>
       <Head>
@@ -58,11 +62,28 @@ export default function Layout({ children }) {
                 </li>
               </ul>
             </div>
-            <a href="/loggin">
-              <button type="button" className="btn loggin_button m-2">
-                se connecter/créer un compte
-              </button>
-            </a>
+            {!user ? (
+              <a href="/login">
+                <button type="button" className="btn loggin_button m-2">
+                  se connecter/créer un compte
+                </button>
+              </a>
+            ) : (
+              <>
+                <a href="/profile">
+                  <button type="button" className="btn loggin_button m-2">
+                    Profil
+                  </button>
+                </a>
+                <button
+                  type="button"
+                  className="btn loggin_button m-2"
+                  onClick={() => supabaseClient.auth.signOut()}
+                >
+                  log out
+                </button>
+              </>
+            )}
           </div>
         </nav>
       </header>
@@ -86,8 +107,8 @@ export default function Layout({ children }) {
                 <a className="navbar-brand" href="/">
                   <p>Home</p>
                 </a>
-                <a className="navbar-brand" href="/loggin">
-                  <p>Loggin</p>
+                <a className="navbar-brand" href="/login">
+                  <p>Login</p>
                 </a>
                 <a
                   className="navbar-brand"
