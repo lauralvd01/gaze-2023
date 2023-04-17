@@ -25,7 +25,11 @@ export default function Home({beers}) {
       <main>
         <div className='container'>
           <ul>
-            {beers.map((beer) => (<li key={beer.id}>{beer.name}</li>))}
+            {beers?(
+              beers.map((beer) => (<li key={beer.id}>{beer.name}</li>))
+            ):(
+              null
+            )}
           </ul>
         </div>
       </main>
