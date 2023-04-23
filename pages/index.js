@@ -1,19 +1,24 @@
-import Link from 'next/link'
+import Form from "./form.js";
+import Link from "next/link";
+import { useState } from "react";
 
-import { supabase } from '../lib/supabaseClient';
-import Head from 'next/head'
+import { supabase } from "../lib/supabaseClient";
+import Head from "next/head";
+import FormModal from "@/components/FormModal";
 
 export async function getServerSideProps() {
-  let { data } = await supabase.from('beers').select()
+  let { data } = await supabase.from("beers").select();
 
   return {
     props: {
-     beers: data
+      beers: data,
     },
-  }
+  };
 }
 
-export default function Home({beers}) {
+export default function Home({ beers }) {
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <>
       <Head>
@@ -23,12 +28,31 @@ export default function Home({beers}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Link href="form" >
-        <p>I had a new drink</p></Link>
-      <ul>
-        {beers.map((beer) => (<li key={beer.id}>{beer.name}</li>))}
-      </ul>
+        <Link href="form">
+          <p>I had a new drink</p>
+        </Link>
+        <button onClick={() => setOpenModal(!openModal)}>
+          Entrer une consommation
+        </button>
+        <FormModal isOpen={openModal} onClose={() => setOpenModal(false)}>
+          <FormModal.Header>Nouvelle consommation</FormModal.Header>
+          <FormModal.Body>
+            {/* Modal Body */}
+            <Form />
+          </FormModal.Body>
+          <FormModal.Footer>
+            <FormModal.DismissButton className="modal-button-close">
+              Annuler
+            </FormModal.DismissButton>
+            <button className="modal-button-save">Sauvegarder</button>
+          </FormModal.Footer>
+        </FormModal>
+        <ul>
+          {beers.map((beer) => (
+            <li key={beer.id}>{beer.name}</li>
+          ))}
+        </ul>
       </main>
     </>
-  )
+  );
 }
