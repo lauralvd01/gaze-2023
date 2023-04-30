@@ -181,6 +181,7 @@ const Form = () => {
               Calculer
             </button>
           </div>
+          <div id="formWarning" style={{ paddingTop: 10, color: "red" }}></div>
         </div>
 
         <div id="result" style={localStyles.result}></div>

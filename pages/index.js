@@ -27,35 +27,45 @@ export const handleSave = (id) => {
   foo = date.getFullYear;
   let year = foo.call(date);
   foo = date.getMinutes;
-  let minutes = foo.call(date);
+  let minute = foo.call(date);
   foo = date.getHours;
   let hour = foo.call(date);
 
-  date = month + "/" + day + "/" + year;
   let beverage = document.getElementById("inputDrink").value;
   let drinkAmount = document.getElementById("inputGlassesDrank").value;
   let delay = document.getElementById("inputTime").value;
 
+  hour -= Math.ceil(Math.max(delay - minute, 0) / 60);
+  day = hour < 0 ? day - 1 : day;
+  month = day < 1 ? month - 1 : month;
+  day = day < 1 ? 30 : day; // bon nique sa mère les exceptions je ferai une fonction si j'ai la foi
+  date = month + "/" + day + "/" + year;
   let time =
-    hour -
-    Math.ceil(Math.max(delay - minutes, 0) / 60) +
+    (hour < 0 ? hour + 24 : hour) +
     ":" +
-    (minutes - delay + 60 * Math.ceil(Math.max(delay - minutes, 0) / 60));
+    (minute - delay + 60 * Math.ceil(Math.max(delay - minute, 0) / 60));
   // NB : Si le verre qu'il a bu est la veille (genre 23h50 et il remplit le form après minuit) pr l'instant ça le prend pas en compte
-  for (let i = 0; i < drinkAmount; i++) {
-    let newDrink = {
-      id: Math.floor(Math.random() * 100000000),
-      user_id: id,
-      beverage,
-      date,
-      time,
-    };
-    supabase
-      .from("drink_history")
-      .insert([newDrink])
-      .then(() => {
-        console.log("inserted person into the database");
-      });
+  // NB l'heure donnée par js est l'heure UTC !! faut corriger l'offset
+  if (delay > 1439) {
+    document.getElementById("formWarning").innerHTML =
+      "Mets pas un délai de plus d'un jour chakal trop de calculs";
+  } else {
+    for (let i = 0; i < drinkAmount; i++) {
+      let newDrink = {
+        id: Math.floor(Math.random() * 100000000),
+        user_id: id,
+        beverage,
+        date,
+        time,
+      };
+      // console.log(newDrink.date, newDrink.time);
+      supabase
+        .from("drink_history")
+        .insert([newDrink])
+        .then(() => {
+          console.log("inserted person into the database");
+        });
+    }
   }
   // console.log(day + "/" + month + "/" + year);
 };
