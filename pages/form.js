@@ -60,20 +60,20 @@ const Form = () => {
         </div>
         <div className="form-group row" style={localStyles.fieldContainer}>
           <label
-            htmlFor="inputDegree"
+            htmlFor="inputDrink"
             className="col-sm-2 col-form-label modal-label"
           >
-            Degré d alcoolémie
+            Nom de la boisson
           </label>
           <div className="col-sm-10 modal-input">
             <input
               type="text"
               pattern="[0-9]+"
               className="form-control"
-              id="inputDegree"
-              placeholder="Degré"
+              id="inputDrink"
+              placeholder="Biérasse..."
               onChange={(input) => {
-                degree = parseInt(input.target.value);
+                degree = input.target.value; // to change
               }}
             ></input>
           </div>
