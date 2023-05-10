@@ -6,6 +6,11 @@ import { useUser } from "@supabase/auth-helpers-react";
 import Form from "./form.js";
 import { useState } from "react";
 import FormModal from "@/components/FormModal";
+import {
+  DateTomillis,
+  MillisToDate,
+  DelayedDate,
+} from "@/usefultools/MillisDateConversion";
 
 export async function getServerSideProps() {
   let { data } = await supabase.from("beers").select();
@@ -19,7 +24,9 @@ export async function getServerSideProps() {
 
 // Given a user id, a beverage and a delay, the following function will upload to the database a row in the drink history
 export const handleSave = (id) => {
-  var date = new Date();
+  let delay = document.getElementById("inputTime").value;
+
+  var date = DelayedDate(new Date(), delay);
   var foo = date.getDate;
   let day = foo.call(date);
   foo = date.getMonth;
@@ -30,65 +37,38 @@ export const handleSave = (id) => {
   let minute = foo.call(date);
   foo = date.getHours;
   let hour = foo.call(date);
+  foo = date.getSeconds;
+  let second = foo.call(date);
 
   let beverage = document.getElementById("inputDrink").value;
   let drinkAmount = document.getElementById("inputGlassesDrank").value;
-  let delay = document.getElementById("inputTime").value;
 
-  hour -= Math.ceil(Math.max(delay - minute, 0) / 60);
-  day = hour < 0 ? day - 1 : day;
-  month = day < 1 ? month - 1 : month;
-  day = day < 1 ? 30 : day; // bon nique sa mère les exceptions je ferai une fonction si j'ai la foi
-  date = month + "/" + day + "/" + year;
-  let time =
-    (hour < 0 ? hour + 24 : hour) +
-    ":" +
-    (minute - delay + 60 * Math.ceil(Math.max(delay - minute, 0) / 60));
-  // NB : Si le verre qu'il a bu est la veille (genre 23h50 et il remplit le form après minuit) pr l'instant ça le prend pas en compte
-  // NB l'heure donnée par js est l'heure UTC !! faut corriger l'offset
-  if (delay > 1439) {
-    document.getElementById("formWarning").innerHTML =
-      "Mets pas un délai de plus d'un jour chakal trop de calculs";
-  } else {
-    for (let i = 0; i < drinkAmount; i++) {
-      let newDrink = {
-        id: Math.floor(Math.random() * 100000000),
-        user_id: id,
-        beverage,
-        date,
-        time,
-      };
-      // console.log(newDrink.date, newDrink.time);
-      supabase
-        .from("drink_history")
-        .insert([newDrink])
-        .then(() => {
-          console.log("inserted person into the database");
-        });
-    }
+  date = month + "/" + day + "/" + year; // ATTENTION JS INDEXE LES MOIS A PARTIR DE ZERO
+  let time = hour + ":" + minute + ":" + second;
+
+  for (let i = 0; i < drinkAmount; i++) {
+    let newDrink = {
+      id: Math.floor(Math.random() * 100000000),
+      user_id: id,
+      beverage,
+      date,
+      time,
+    };
+
+    supabase
+      .from("drink_history")
+      .insert([newDrink])
+      .then(() => {
+        console.log("inserted person into the database");
+      });
   }
-  // console.log(day + "/" + month + "/" + year);
 };
 
 export default function Home({ beers }) {
   const [openModal, setOpenModal] = useState(false);
   const userSession = useUser();
-  let person = {
-    user_id: "sim2",
-    beverage: "1664",
-    date: "03/03/2001",
-    time: "12:00",
-  };
 
   const handleList = () => {
-    var date = new Date();
-    var foo = date.getDate;
-    let day = foo.call(date);
-    foo = date.getMonth;
-    let month = foo.call(date);
-    foo = date.getYear;
-    let year = foo.call(date);
-
     supabase
       .from("drink_history")
       .select("*")
