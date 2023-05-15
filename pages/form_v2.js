@@ -1,13 +1,6 @@
-const Form = () => {
+const Form_v2 = () => {
   let glasses, degree, timeSinceDrink, weight, sex;
   let result;
-
-  const updateWeight = (input) => {
-    const weightLabel = document.getElementById("weightLabel");
-    weightLabel.innerHTML = `Ton poids : ${input.target.value} kg`;
-    // console.log(input.target.value)
-    weight = parseInt(input.target.value);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -52,12 +45,12 @@ const Form = () => {
           <div className="col-sm-10 modal-input">
             <input
               type="text"
-              pattern="[0-9]+"
+              pattern="[0-9,.]+"
               className="form-control"
               id="inputGlassesDrank"
               placeholder="Verres"
               onChange={(input) => {
-                glasses = parseFloat(input.target.value);
+                glasses = parseFloat(input.target.value.replaceAll(",", "."));
               }}
             ></input>
           </div>
@@ -67,7 +60,7 @@ const Form = () => {
             htmlFor="inputDrink"
             className="col-sm-2 col-form-label modal-label"
           >
-            Nom de la boisson
+            Nom de la boisson {/* FAIRE UN MENU DEROULANT */}
           </label>
           <div className="col-sm-10 modal-input">
             <input
@@ -104,90 +97,6 @@ const Form = () => {
           </div>
         </div>
 
-        <fieldset className="form-group">
-          <div className="row">
-            <legend className="col-form-label col-sm-2 pt-0">Sexe</legend>
-            <div className="col-sm-10">
-              <div className="form-check radio-line">
-                <label className="form-check-label" htmlFor="gridRadios1">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="gridRadios"
-                    id="gridRadios1"
-                    value="femme"
-                    onChange={(input) => {
-                      sex = input.target.value;
-                    }}
-                  ></input>
-                  Femme{" "}
-                </label>
-                <label className="form-check-label" htmlFor="gridRadios2">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="gridRadios"
-                    id="gridRadios2"
-                    value="homme"
-                    onChange={(input) => {
-                      sex = input.target.value;
-                    }}
-                  ></input>
-                  Homme{" "}
-                </label>
-                <label className="form-check-label" htmlFor="gridRadios3">
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="gridRadios"
-                    id="gridRadios3"
-                    value="autre"
-                    onChange={(input) => {
-                      sex = input.target.value;
-                    }}
-                  ></input>
-                  Autre{" "}
-                </label>
-              </div>
-            </div>
-          </div>
-        </fieldset>
-
-        <div className="form-group row" style={localStyles.fieldContainer}>
-          <label
-            htmlFor="inputWeight"
-            className="col-sm-2 col-form-label modal-label"
-            id="weightLabel"
-          >
-            Ton poids
-          </label>
-          <div className="col-sm-10 modal-input">
-            <input
-              type="range"
-              className="form-control"
-              id="inputWeight"
-              onChange={updateWeight}
-              min="40"
-              max="150"
-            ></input>
-          </div>
-        </div>
-
-        <div
-          className="form-group row"
-          style={{ ...localStyles.centered, minWidth: "70vw" }}
-        >
-          <div
-            className="col-sm-10"
-            style={{ ...localStyles.centered, paddingTop: 20 }}
-          >
-            <button className="btn btn-primary" onClick={handleSubmit}>
-              Calculer
-            </button>
-          </div>
-          <div id="formWarning" style={{ paddingTop: 10, color: "red" }}></div>
-        </div>
-
         <div id="result" style={localStyles.result}></div>
       </form>
     </div>
@@ -196,7 +105,7 @@ const Form = () => {
 
 const localStyles = {
   container: {
-    minHeight: "60vh",
+    minHeight: "30vh",
     minWidth: "560px",
     // justifyContent: "center",
     // alignItems: "center",
@@ -226,4 +135,4 @@ const localStyles = {
   },
 };
 
-export default Form;
+export default Form_v2;
