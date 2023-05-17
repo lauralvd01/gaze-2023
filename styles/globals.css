@@ -42,3 +42,9 @@ footer {
   font-size: x-large;
   font-style: bold;
 }
+
+.comments {
+  text-align: right;
+  font-style: italic;
+  color: #ffcb1f;
+}

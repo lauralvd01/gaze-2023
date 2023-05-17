@@ -212,10 +212,14 @@ export default function Home({ beers }) {
         ) : null}
         <div className="container">
           {userSession ? (
+            <div>
             <p className="current-status">
                 Salut {username}, tu es actuellement à{" "}
                 <b> {currentDegree} g/L</b> {" "} {(currentDegree!=0)? "!" : "."}
             </p>
+            <p className="comments">{comments(currentDegree)}
+            </p>
+            </div>
           ) : null}
           <ul>
             {beers
@@ -232,3 +236,22 @@ export default function Home({ beers }) {
 const noUnderline = {
   textDecoration: "none",
 };
+
+const comments = (degree) => {
+  console.log(degree);
+  if (degree == 0) {
+    return "Tu n'as rien bu, tu es sobre !";
+  } else if (degree < 0.5) {
+    return "Tu es en dessous de la limite légale pour conduire, mais tu es quand même un peu pompette !";
+  } else if (degree < 1) {
+    return "Tu es au dessus de la limite légale pour conduire, mais tu n'es sans doute pas encore bourré(e) !";
+  } else if (degree < 1.5) {
+    return "Tu es bourré(e), mais tu peux encore te déplacer sans trop de problème !";
+  } else if (degree < 2) {
+    return "Tu es complètement bourré(e), tu devrais peut-être rentrer chez toi !";
+  } else if (degree < 2.5) {
+    return "Demain tu auras la gueule de bois, mais ce soir tu es complètement déchiré(e) !";
+  } else {
+    return "Tu es dans un état critique, tu devrais appeler les urgences !";
+  }
+}
