@@ -13,13 +13,19 @@
     "@emotion/styled": "^11.10.6",
     "@fontsource/public-sans": "^4.5.12",
     "@mui/joy": "^5.0.0-alpha.69",
+    "@react-spring/web": "^9.7.2",
+    "@supabase/auth-helpers-nextjs": "^0.6.0",
+    "@supabase/auth-helpers-react": "^0.3.1",
     "@supabase/supabase-js": "^2.14.0",
     "bootstrap": "^5.2.3",
+    "chart.js": "^4.3.0",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.2",
     "next": "13.2.2",
     "react": "18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
+    "styled-components": "^5.3.10",
     "supabase": "^1.47.3"
   }
 }
