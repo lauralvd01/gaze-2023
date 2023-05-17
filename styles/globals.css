@@ -12,8 +12,26 @@ footer {
   color: #ebf5ee;
 }
 
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
 .container {
   padding: 10px;
+}
+
+.container.week {
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+.container.events {
+  margin-top: 5%;
+  margin-bottom: 10%;
 }
 
 .warning {
@@ -33,6 +51,29 @@ footer {
   color: #1e2433;
 }
 
+.btn.goto {
+  background-color: #f5bb00;
+  border-color: black;
+  font-size: small;
+}
+
+.btn.goto:hover {
+  background-color: #ffcb1f;
+  border-color: #1e2433;
+  color: #1e2433;
+}
+
+.btn.display {
+  color: white;
+  text-decoration: underline;
+}
+
+.btn.display:hover {
+  color: #ffcb1f;
+  font-style: bold;
+  text-decoration: underline;
+}
+
 .container.logging-container {
   max-width: 600px;
 }
@@ -47,4 +88,14 @@ footer {
   text-align: right;
   font-style: italic;
   color: #ffcb1f;
+}
+
+.btn.add-drink {
+  background-color: #fdc166;
+  border-color: white;
+  color: black;
+  font-size: medium;
+  width: 20%;
+  height: auto;
+  margin-left: 10%;
 }

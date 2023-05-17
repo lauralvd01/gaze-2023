@@ -1,6 +1,7 @@
 import { supabase } from "../lib/supabaseClient";
 import Head from "next/head";
 import Layout from "../components/layout";
+import BeerBox from "../components/BeerBox";
 import { useUser } from "@supabase/auth-helpers-react";
 // Simon
 import Form from "./form.js";
@@ -14,6 +15,7 @@ import {
 } from "@/usefultools/MillisDateConversion";
 import ComputeDegree from "@/usefultools/ComputeDegree";
 import Link from "next/link";
+import { fontStyle } from "@mui/system";
 
 function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -156,9 +158,10 @@ export default function Home({ beers }) {
     }
   }, [userSession]);
 
+  // <button onClick={handleList}>List drink history in console</button>
   const handleList = () => {
     supabase
-      .from("drink_history")
+      .from("drink_history_v2")
       .select("*")
       .then((result) => {
         console.log(result.data);
@@ -184,11 +187,18 @@ export default function Home({ beers }) {
             Go to chart
           </Link>
         </button>
-        <button onClick={handleList}>List drink history in console</button>
-        {userSession ? (
-          <div>
-            <button onClick={() => setOpenModal(!openModal)}>
-              Entrer une consommation
+        <div className="container">
+          {userSession ? (
+            <div>
+            <p className="current-status">
+                Salut {username}, tu es actuellement à{" "}
+                <b> {currentDegree} g/L</b> {" "} {(currentDegree!=0)? "!" : "."}
+            </p>
+            <p className="comments">{comments(currentDegree)}
+            </p>
+            <div>
+            <button className="btn add-drink" onClick={() => setOpenModal(!openModal)}>
+              J'ai bu ...
             </button>
             <FormModal isOpen={openModal} onClose={() => setOpenModal(false)}>
               <FormModal.Header>Nouvelle consommation</FormModal.Header>
@@ -202,30 +212,47 @@ export default function Home({ beers }) {
                 </FormModal.DismissButton>
                 <button
                   className="modal-button-save"
-                  onClick={() => handleSave(userSession.id)}
+                  onClick={() => {handleSave(userSession.id);setOpenModal(false)}}
                 >
                   Sauvegarder
                 </button>
               </FormModal.Footer>
             </FormModal>
           </div>
-        ) : null}
-        <div className="container">
+          </div>
+          ) : null}
+
           {userSession ? (
-            <div>
-            <p className="current-status">
-                Salut {username}, tu es actuellement à{" "}
-                <b> {currentDegree} g/L</b> {" "} {(currentDegree!=0)? "!" : "."}
-            </p>
-            <p className="comments">{comments(currentDegree)}
-            </p>
+            <div className="container week">
+              <p>Ma semaine :</p>
+              <p><em>À faire : graphe en bâtons des statistiques de la semaine</em></p>
+              <div  className="right">
+                <a href="/index">
+                    <button type="button" className="btn goto">
+                      Mes statistiques
+                    </button>
+                </a>
+              </div>
             </div>
           ) : null}
-          <ul>
+
+          <div className="container events"> 
+            <h3>Evènements à venir</h3>
+            <p><em>À faire : component évènement</em></p>
+            <div className="right">
+            <a href="/index">
+                    <button type="button" className="btn display">
+                      Voir tous les évènements
+                    </button>
+            </a>
+            </div>
+          </div>
+
+          <div>
             {beers
-              ? beers.map((beer) => <li key={beer.id}>{beer.name}</li>)
+              ? beers.map((beer) => <BeerBox id={beer.id} name={beer.name} degree={beer.degree} price={beer.price}/>)
               : null}
-          </ul>
+          </div>
           <button onClick={() => console.log(userSession)}>test</button>
         </div>
       </main>
