@@ -7,6 +7,7 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useState, useEffect } from "react";
 
 async function signInWithEmailAndPassword(supabaseClient, email, password) {
+  console.log("signing in with email and password");
   await supabaseClient.auth
     .signInWithPassword({
       email: email,
@@ -20,6 +21,7 @@ async function signInWithEmailAndPassword(supabaseClient, email, password) {
 }
 
 async function signUpWithEmailAndPassword(supabaseClient, email, password) {
+  console.log("signing up with email and password");
   await supabaseClient.auth
     .signUp({
       email: email,
