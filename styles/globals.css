@@ -1,0 +1,32 @@
+main {
+  background-color: #283044;
+  color: #ebf5ee;
+}
+
+nav {
+  background-color: #f5bb00;
+}
+
+footer {
+  background-color: #1e2433;
+  color: #ebf5ee;
+}
+
+.container {
+  padding: 10px;
+}
+
+.btn.loggin_button {
+  background-color: #f5bb00;
+  border-color: black;
+}
+
+.btn.loggin_button:hover {
+  background-color: #ffcb1f;
+  border-color: #1e2433;
+  color: #1e2433;
+}
+
+.container.logging-container {
+  max-width: 600px;
+}
