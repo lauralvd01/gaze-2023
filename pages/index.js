@@ -206,31 +206,16 @@ export default function Home({ beers }) {
                 >
                   Sauvegarder
                 </button>
-                <button className="modal-button-save" onClick={handleAddPerson}>
-                  ajouter personne
-                </button>
-                <button className="modal-button-save" onClick={handleList_v2}>
-                  lister personnes
-                </button>
-                <button
-                  className="modal-button-save"
-                  onClick={async () => handleList_acts(userSession.id)}
-                >
-                  lsit acts
-                </button>
               </FormModal.Footer>
             </FormModal>
           </div>
         ) : null}
         <div className="container">
           {userSession ? (
-            <div>
-              <span>
+            <p className="current-status">
                 Salut {username}, tu es actuellement à{" "}
-                <b> {currentDegree} g/L</b>
-                de sang
-              </span>
-            </div>
+                <b> {currentDegree} g/L</b> {" "} {(currentDegree!=0)? "!" : "."}
+            </p>
           ) : null}
           <ul>
             {beers

@@ -16,6 +16,12 @@ footer {
   padding: 10px;
 }
 
+.warning {
+  text-align: center;
+  font-size: small;
+  font-style: italic;
+}
+
 .btn.loggin_button {
   background-color: #f5bb00;
   border-color: black;
@@ -29,4 +35,10 @@ footer {
 
 .container.logging-container {
   max-width: 600px;
+}
+
+.current-status {
+  text-align: center;
+  font-size: x-large;
+  font-style: bold;
 }
