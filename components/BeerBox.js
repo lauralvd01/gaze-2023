@@ -1,8 +1,4 @@
-// import "../styles/Modal.css";
-import { useSpring, animated, useTransition } from "@react-spring/web";
-import { useEffect, useContext, createContext } from "react";
-
-const ModalContext = createContext();
+import style from "@/styles/BeerBox.module.css";
 
 /*
 <div class="card" style="width: 18rem;">
@@ -15,61 +11,18 @@ const ModalContext = createContext();
 </div>
 */
 
-/*
-<ul>
-  {beers? beers.map(
-    (beer) => <li key={beer.id}>{beer.name}</li>
-  ) : null}
-</ul>
-*/
-
-const BeerBox = ({ id, name, degree, price }) => {
+const BeerBox = ({id, name, degree, price}) => {
   return (
-    <div class="card" style="width: 18rem;" key={id}>
-      <img src="..." class="card-img-top" alt="..."/>
-      <div class="card-body">
-        <h5 class="card-title">name</h5>
-        <p class="card-text">Degree : {degree}</p>
-        <p class="card-text">Price : {price}</p>
-        <a href="#" class="btn btn-primary">Boire</a>
+    <div className="card" key={id}>
+      <img src="..." className="card-img-top" alt="Photo de la bière en attente"/>
+      <div className="card-body">
+        <h5 className="card-title">{name}</h5>
+        <p className="card-text">Degree : {degree}</p>
+        <p className="card-text">Price : {price}</p>
+        <a href="#" className="btn btn-primary">Boire</a>
       </div>
     </div>
   )
 };
 
-// Je sais pas pourquoi mais quand le modal disparait il fade au lieu de remonter en fadant mais pg
-// Je pense que c'est parce qu'il voit pas le styles donné en argument de la fonction de modalTransition
-
-const DismissButton = ({ children, className }) => {
-  const { onClose } = useContext(ModalContext);
-
-  return (
-    <button type="button" onClick={onClose} className={className}>
-      {children}
-    </button>
-  );
-};
-
-const ModalHeader = ({ children }) => {
-  return (
-    <div className="react-modal-header">
-      <div className="react-modal-title">{children}</div>
-      <DismissButton className="btn-close">&times;</DismissButton>
-    </div>
-  );
-};
-
-const ModalBody = ({ children }) => {
-  return <div className="react-modal-body">{children}</div>;
-};
-
-const ModalFooter = ({ children }) => {
-  return <div className="react-modal-footer">{children}</div>;
-};
-
-FormModal.Header = ModalHeader;
-FormModal.Body = ModalBody;
-FormModal.Footer = ModalFooter;
-FormModal.DismissButton = DismissButton;
-
-export default FormModal;
+export default BeerBox;

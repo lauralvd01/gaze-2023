@@ -249,9 +249,11 @@ export default function Home({ beers }) {
           </div>
 
           <div>
+            <BeerBox id={"2"} name={"BeerTest"} degree={"5"} price={"2"}/>
+            {/* 
             {beers
               ? beers.map((beer) => <BeerBox id={beer.id} name={beer.name} degree={beer.degree} price={beer.price}/>)
-              : null}
+              : null}*/}
           </div>
           <button onClick={() => console.log(userSession)}>test</button>
         </div>
