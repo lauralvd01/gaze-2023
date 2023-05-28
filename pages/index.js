@@ -1,7 +1,7 @@
 import { supabase } from "../lib/supabaseClient";
+import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
 import Layout from "../components/layout";
-import BeerBox from "../components/BeerBox";
 import { useUser } from "@supabase/auth-helpers-react";
 // Simon
 import Form from "./form.js";
@@ -16,6 +16,7 @@ import {
 import ComputeDegree from "@/usefultools/ComputeDegree";
 import Link from "next/link";
 import { fontStyle } from "@mui/system";
+import BeerBoxes from "@/components/BeerBoxes";
 
 function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -249,11 +250,7 @@ export default function Home({ beers }) {
           </div>
 
           <div>
-            <BeerBox id={"2"} name={"BeerTest"} degree={"5"} price={"2"}/>
-            {/* 
-            {beers
-              ? beers.map((beer) => <BeerBox id={beer.id} name={beer.name} degree={beer.degree} price={beer.price}/>)
-              : null}*/}
+            { beers ? <BeerBoxes beers={beers}/> : null}
           </div>
           <button onClick={() => console.log(userSession)}>test</button>
         </div>
