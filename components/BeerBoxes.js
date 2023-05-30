@@ -10,8 +10,8 @@ const BeerBoxes = ({beers}) => {
             {beers.map((beer) => 
                 <div className="col" key={beer.id}>
                 <div className="card bg-warning border-dark" key={beer.id}>
-                    <div className="card-img-top">
-                        <MyImage />
+                    <div className="card-img-top beer_img">
+                        <MyImage name={"DELIBLUE"}/>
                     </div>
                     <h5 className="card-title">{beer.name}</h5>
                     <div className="card-body">
@@ -49,17 +49,30 @@ const BeerBoxes = ({beers}) => {
 
 
 import Image from 'next/image'
-import mypic from '../images/DELIBLUE.png'
+import mypic from '../public/DELIBLUE.png'
 
-const MyImage = () => {
-  return (
-    <Image
-      src={mypic}
-      alt="Picture of the delirium blue"
-      width="150"
-      height="150"
-    />
-  )
-}
+const MyImage = ({name}) => {
+    let impath = "/../public/".concat(name).concat(".png")
+    return (
+        <Image
+          src= {impath}
+        //   className={style.exit_image}
+          alt={impath}
+          width="100"
+          height="100"
+        />
+    )
+  }
+
+// const MyImage = () => {
+//   return (
+//     <Image
+//       src={mypic}
+//       alt="Picture of the delirium blue"
+//       width="150"
+//       height="150"
+//     />
+//   )
+// }
 
 export default BeerBoxes;
