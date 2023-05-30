@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FormModal from "./FormModal";
 import Form_v2 from "@/pages/form_v2.js";
+import Image from 'next/image'
 
 const BeerBoxes = ({beers}) => {
     const [openModal, setOpenModal] = useState(false);
@@ -11,7 +12,8 @@ const BeerBoxes = ({beers}) => {
                 <div className="col" key={beer.id}>
                 <div className="card bg-warning border-dark" key={beer.id}>
                     <div className="card-img-top">
-                        <MyImage />
+                    {/*beer.URL ? <Image src={beer.URL} alt="Picture of the delirium blue" width="150" height="150"/> : null*/}
+                    <Image src="/../public/beers/9.png" alt="Picture of the author" width={150} height={150} />
                     </div>
                     <h5 className="card-title">{beer.name}</h5>
                     <div className="card-body">
@@ -33,7 +35,7 @@ const BeerBoxes = ({beers}) => {
                             </FormModal.DismissButton>
                             <button
                             className="modal-button-save"
-                            onClick={() => {handleSave(userSession.id);document.getElementById("inputDrink").value = beer.name;setOpenModal(false)}}
+                            onClick={() => {handleSave(userSession.id);document.getElementById("inputDrink").setAttribute("value", "Chouffe");setOpenModal(false)}}
                             >
                             Sauvegarder
                             </button>
@@ -47,19 +49,10 @@ const BeerBoxes = ({beers}) => {
     );
 };
 
-
-import Image from 'next/image'
-import mypic from '../images/DELIBLUE.png'
-
-const MyImage = () => {
-  return (
-    <Image
-      src={mypic}
-      alt="Picture of the delirium blue"
-      width="150"
-      height="150"
-    />
-  )
+const MyImage = (srcURL) => {
+    return (
+        <Image src="/beerLogos/9.png" alt="Picture of the author" width={150} height={150} />
+    )
 }
 
 export default BeerBoxes;
