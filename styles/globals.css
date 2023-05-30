@@ -113,7 +113,13 @@ footer {
   color: #1e2433;
 }
 
-/* .form-select.bierasse_form {
-  width: 40%;
-  margin-right: 10px;
-} */
+.btn.chart_button {
+  border: solid #283044;
+  color: #283044;
+}
+
+.btn.chart_button:hover {
+  color: white;
+  background-color: #283044;
+  border: solid #283044;
+}

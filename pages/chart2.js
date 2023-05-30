@@ -132,8 +132,8 @@ const Chart = () => {
         coo
       </button> */}
       <a href="/">
-        <button type="button" className="btn inner_button m-2">
-          Mes statistiques
+        <button type="button" className="btn chart_button m-2">
+          Retour
         </button>
       </a>
       {null}

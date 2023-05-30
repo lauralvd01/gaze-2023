@@ -63,9 +63,9 @@ const Form_v2 = () => {
             Nom de la boisson {/* FAIRE UN MENU DEROULANT */}
           </label>
           <div className="col-sm-10 modal-input">
-            <select class="form-select bierasse_form" aria-label="Default select example">
+            <select id="inputDrink" class="form-select bierasse_form" aria-label="Default select example">
               <option selected>sélectionner</option>
-              <option value="1">One</option>
+              <option value="Chouffe">Chouffe</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select>
