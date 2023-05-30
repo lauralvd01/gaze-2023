@@ -92,6 +92,7 @@ export default function Layout({ children }) {
       </main>
       <footer className="shadow">
         <div className="container">
+          <p className="warning"> Attention l'abus d'alcool est dangereux pour la santé !</p>
           <div className="row">
             <div className="col">
               <div className="container">
