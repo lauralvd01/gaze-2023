@@ -259,6 +259,7 @@ export default function Home({ beers }) {
   );
 }
 
+
 const noUnderline = {
   textDecoration: "none",
 };
