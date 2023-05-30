@@ -63,6 +63,14 @@ const Form_v2 = () => {
             Nom de la boisson {/* FAIRE UN MENU DEROULANT */}
           </label>
           <div className="col-sm-10 modal-input">
+            <select class="form-select bierasse_form" aria-label="Default select example">
+              <option selected>sélectionner</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          {/* <div className="col-sm-10 modal-input">
             <input
               type="text"
               pattern="[0-9]+"
@@ -73,7 +81,7 @@ const Form_v2 = () => {
                 degree = input.target.value; // to change
               }}
             ></input>
-          </div>
+          </div> */}
         </div>
 
         <div className="form-group row" style={localStyles.fieldContainer}>

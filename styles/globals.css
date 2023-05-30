@@ -99,3 +99,21 @@ footer {
   height: auto;
   margin-left: 10%;
 }
+
+.btn.inner_button {
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: #f5bb00;
+  border-color: black;
+}
+
+.btn.inner_button:hover {
+  background-color: #ffcb1f;
+  border-color: #1e2433;
+  color: #1e2433;
+}
+
+/* .form-select.bierasse_form {
+  width: 40%;
+  margin-right: 10px;
+} */
