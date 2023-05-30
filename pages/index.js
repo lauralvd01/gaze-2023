@@ -14,6 +14,7 @@ import {
 } from "@/usefultools/MillisDateConversion";
 import ComputeDegree from "@/usefultools/ComputeDegree";
 import Link from "next/link";
+import Leaderboard from "@/components/Leaderboard";
 
 function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -190,6 +191,7 @@ export default function Home({ beers }) {
             <button onClick={() => setOpenModal(!openModal)}>
               Entrer une consommation
             </button>
+            <Leaderboard />
             <FormModal isOpen={openModal} onClose={() => setOpenModal(false)}>
               <FormModal.Header>Nouvelle consommation</FormModal.Header>
               <FormModal.Body>
