@@ -123,3 +123,9 @@ footer {
   background-color: #283044;
   border: solid #283044;
 }
+
+.card-img-top.beer_img {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

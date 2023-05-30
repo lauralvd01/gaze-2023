@@ -11,9 +11,11 @@ const BeerBoxes = ({beers}) => {
             {beers.map((beer) => 
                 <div className="col" key={beer.id}>
                 <div className="card bg-warning border-dark" key={beer.id}>
-                    <div className="card-img-top">
+                    {/*<div className="card-img-top">*/}
                     {/*beer.URL ? <Image src={beer.URL} alt="Picture of the delirium blue" width="150" height="150"/> : null*/}
-                    <Image src="/../public/beers/9.png" alt="Picture of the author" width={150} height={150} />
+                    {/*<Image src="/../public/beers/9.png" alt="Picture of the author" width={150} height={150} />*/}
+                    <div className="card-img-top beer_img">
+                        <MyImage name={"DELIBLUE"}/>
                     </div>
                     <h5 className="card-title">{beer.name}</h5>
                     <div className="card-body">
@@ -49,10 +51,26 @@ const BeerBoxes = ({beers}) => {
     );
 };
 
-const MyImage = (srcURL) => {
+//const MyImage = (srcURL) => {
+//    return (
+//        <Image src="/beerLogos/9.png" alt="Picture of the author" width={150} height={150} />
+//    )
+//}
+
+import Image from 'next/image'
+import mypic from '../public/DELIBLUE.png'
+
+const MyImage = ({name}) => {
+    let impath = "/../public/".concat(name).concat(".png")
     return (
-        <Image src="/beerLogos/9.png" alt="Picture of the author" width={150} height={150} />
+        <Image
+          src= {impath}
+        //   className={style.exit_image}
+          alt={impath}
+          width="100"
+          height="100"
+        />
     )
-}
+  }
 
 export default BeerBoxes;
