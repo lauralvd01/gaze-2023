@@ -114,7 +114,7 @@ const Chart = () => {
 
   return (
     <div>
-      <button
+      {/* <button
         onClick={() => {
           console.log("users", users);
           console.log("data", data);
@@ -130,7 +130,12 @@ const Chart = () => {
         }}
       >
         coo
-      </button>
+      </button> */}
+      <a href="/">
+        <button type="button" className="btn chart_button m-2">
+          Retour
+        </button>
+      </a>
       {null}
       {data ? (
         <Line data={data} width={100} height={40} options={options} />

@@ -99,3 +99,27 @@ footer {
   height: auto;
   margin-left: 10%;
 }
+
+.btn.inner_button {
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: #f5bb00;
+  border-color: black;
+}
+
+.btn.inner_button:hover {
+  background-color: #ffcb1f;
+  border-color: #1e2433;
+  color: #1e2433;
+}
+
+.btn.chart_button {
+  border: solid #283044;
+  color: #283044;
+}
+
+.btn.chart_button:hover {
+  color: white;
+  background-color: #283044;
+  border: solid #283044;
+}
