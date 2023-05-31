@@ -50,12 +50,6 @@ async function signUpWithEmailAndPassword(
     console.error(error);
     // Handle the error here
   } else {
-    // Wait for the user object to be defined
-    // while (!data) {
-    //   await new Promise((resolve) => setTimeout(resolve, 1000));
-    //   console.log("waiting for user");
-    // }
-
     console.log(typeof data);
     console.log(data.user.id);
     const userId = data.user.id;
@@ -67,10 +61,6 @@ async function signUpWithEmailAndPassword(
         .from("profiles")
         .update({ username: username, weight: weight, gender: gender })
         .eq("id", userId);
-
-      const {} = await supabase
-        .from("drink_history_v2")
-        .insert({ user_id: userId, drink_acts: [] });
     }
   }
 
