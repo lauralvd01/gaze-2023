@@ -148,5 +148,7 @@ footer {
 }
 
 .leader_box {
-  border-color: #1e2433;
+  border-color: solid #1e2433;
+  background-color: aqua;
+  border-radius: 6px;
 }
