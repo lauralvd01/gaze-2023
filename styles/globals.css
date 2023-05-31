@@ -148,5 +148,12 @@ footer {
 }
 
 .leader_box {
-  border-color: #1e2433;
+  border-color: solid #fdc166;
+  background-color: white;
+  color: #1e2433;
+  border-radius: 6px;
+}
+
+.leader_box h1 {
+  margin-left: 10px;
 }
