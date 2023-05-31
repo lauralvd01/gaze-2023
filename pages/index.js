@@ -71,7 +71,6 @@ export const handleList_acts = async (userId) => {
 // Given a user id, a beverage and a delay, the following function will upload to the database a row in the drink history
 export const handleSave = async (userId) => {
   let delay = document.getElementById("inputTime").value;
-
   var date = DelayedDate(new Date(), delay);
   var foo = date.getDate;
   let day = foo.call(date);
@@ -279,6 +278,7 @@ export default function Home({ beers }) {
                 beers={beers}
                 prefilledBeer={prefilledBeer}
                 setPrefilledBeer={setPrefilledBeer}
+                userId={userSession ? userSession.id : null}
               />
             ) : null}
           </div>

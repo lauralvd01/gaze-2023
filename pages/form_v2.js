@@ -53,6 +53,9 @@ const Form_v2 = ({ prefilledBeer }) => {
               placeholder="Verres"
               onChange={(input) => {
                 glasses = parseFloat(input.target.value.replaceAll(",", "."));
+                document
+                  .getElementById("inputGlassesDrank")
+                  .setAttribute("value", glasses);
               }}
             ></input>
           </div>
@@ -66,7 +69,9 @@ const Form_v2 = ({ prefilledBeer }) => {
           </label>
           <div className="col-sm-10 modal-input">
             {prefilledBeer ? (
-              <div id="inputDrink">{prefilledBeer}</div>
+              <option id="inputDrink" value={prefilledBeer}>
+                {prefilledBeer}
+              </option>
             ) : (
               <select
                 id="inputDrink"
@@ -80,18 +85,6 @@ const Form_v2 = ({ prefilledBeer }) => {
               </select>
             )}
           </div>
-          {/* <div className="col-sm-10 modal-input">
-            <input
-              type="text"
-              pattern="[0-9]+"
-              className="form-control"
-              id="inputDrink"
-              placeholder="Biérasse..."
-              onChange={(input) => {
-                degree = input.target.value; // to change
-              }}
-            ></input>
-          </div> */}
         </div>
 
         <div className="form-group row" style={localStyles.fieldContainer}>
@@ -110,6 +103,9 @@ const Form_v2 = ({ prefilledBeer }) => {
               placeholder="Temps"
               onChange={(input) => {
                 timeSinceDrink = parseInt(input.target.value);
+                document
+                  .getElementById("inputTime")
+                  .setAttribute("value", timeSinceDrink);
               }}
             ></input>
           </div>
