@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FormModal from "./FormModal";
 import Form_v2 from "@/pages/form_v2.js";
+import Image from 'next/image'
 
 const BeerBoxes = ({beers}) => {
     const [openModal, setOpenModal] = useState(false);
@@ -10,6 +11,9 @@ const BeerBoxes = ({beers}) => {
             {beers.map((beer) => 
                 <div className="col" key={beer.id}>
                 <div className="card bg-warning border-dark" key={beer.id}>
+                    {/*<div className="card-img-top">*/}
+                    {/*beer.URL ? <Image src={beer.URL} alt="Picture of the delirium blue" width="150" height="150"/> : null*/}
+                    {/*<Image src="/../public/beers/9.png" alt="Picture of the author" width={150} height={150} />*/}
                     <div className="card-img-top beer_img">
                         <MyImage name={"DELIBLUE"}/>
                     </div>
@@ -33,7 +37,7 @@ const BeerBoxes = ({beers}) => {
                             </FormModal.DismissButton>
                             <button
                             className="modal-button-save"
-                            onClick={() => {handleSave(userSession.id);document.getElementById("inputDrink").value = beer.name;setOpenModal(false)}}
+                            onClick={() => {handleSave(userSession.id);document.getElementById("inputDrink").setAttribute("value", "Chouffe");setOpenModal(false)}}
                             >
                             Sauvegarder
                             </button>
@@ -47,6 +51,11 @@ const BeerBoxes = ({beers}) => {
     );
 };
 
+//const MyImage = (srcURL) => {
+//    return (
+//        <Image src="/beerLogos/9.png" alt="Picture of the author" width={150} height={150} />
+//    )
+//}
 
 import Image from 'next/image'
 import mypic from '../public/DELIBLUE.png'
@@ -64,5 +73,8 @@ const MyImage = ({name}) => {
     )
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 80fd34f63c426cdffbaa9da55f59aa1c2a9a424d
 export default BeerBoxes;
