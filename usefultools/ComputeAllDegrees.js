@@ -62,7 +62,7 @@ const ComputeAllDegree = async () => {
 
           let degreeContribution =
             (beer_degree * 0.01 * drink_act.glasses_amount * 125 * 0.8) /
-            (profile.weight * (profile.gender === "male" ? 0.8 : 0.7));
+            (profile.weight * (profile.gender === "male" ? 0.7 : 0.6));
 
           if (timeSinceDrink < 0) {
             degreeContribution = 0;

@@ -129,3 +129,16 @@ footer {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.btn.beer_button {
+  text-align: center;
+  width: 80%;
+  border: solid #283044;
+  color: #283044;
+}
+
+.btn.beer_button:hover {
+  color: white;
+  background-color: #283044;
+  border: solid #283044;
+}
