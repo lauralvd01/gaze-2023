@@ -68,7 +68,9 @@ async function signUpWithEmailAndPassword(
         .update({ username: username, weight: weight, gender: gender })
         .eq("id", userId);
 
-      console.log("test", data, error);
+      const {} = await supabase
+        .from("drink_history_v2")
+        .insert({ user_id: userId, drink_acts: [] });
     }
   }
 
