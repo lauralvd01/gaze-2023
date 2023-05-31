@@ -57,7 +57,7 @@ const BeerBoxes = ({beers}) => {
 //    )
 //}
 
-import Image from 'next/image'
+//import Image from 'next/image'
 import mypic from '../public/DELIBLUE.png'
 
 const MyImage = ({name}) => {
