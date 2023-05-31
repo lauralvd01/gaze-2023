@@ -24,7 +24,7 @@ const BeerBoxes = ({beers}) => {
                         <p className="card-text">Prix / Degré : {Math.floor(100*beer.price/beer.degree)/100} €</p>
                     </div>
                     <div className="card-footer">
-                        <button className="btn btn-primary" onClick={() => setOpenModal(!openModal)}>Boire</button>
+                        <button className="btn beer_button m-2" onClick={() => setOpenModal(!openModal)}>Boire</button>
                         <FormModal isOpen={openModal} onClose={() => setOpenModal(false)}>
                         <FormModal.Header>Nouvelle consommation</FormModal.Header>
                         <FormModal.Body>

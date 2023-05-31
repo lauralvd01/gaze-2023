@@ -2,6 +2,7 @@ import { supabase } from "../lib/supabaseClient";
 import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
 import Layout from "../components/layout";
+import Leaderboard from "@/components/leaderboard";
 import { useUser } from "@supabase/auth-helpers-react";
 // Simon
 import Form_v2 from "./form_v2.js";
@@ -182,11 +183,11 @@ export default function Home({ beers }) {
         />
       </Head>
       <main>
-        <a href="chart2">
+        {/* <a href="chart2">
           <button type="button" className="btn inner_button m-2">
             afficher le graphique 
           </button>
-        </a>
+        </a> */}
         <div className="container">
           {userSession ? (
             <div>
@@ -200,6 +201,12 @@ export default function Home({ beers }) {
               <button type="button" className="btn inner_button m-2" onClick={() => setOpenModal(!openModal)}>
                 j'ai bu ...
               </button>
+              <a href="chart2">
+                <button type="button" className="btn inner_button m-2">
+                  afficher le graphique 
+                </button>
+              </a>
+              <Leaderboard leader_list={["Paul", "Simun", "Laura"]}></Leaderboard>
             <FormModal isOpen={openModal} onClose={() => setOpenModal(false)}>
               <FormModal.Header>Nouvelle consommation</FormModal.Header>
               <FormModal.Body>
