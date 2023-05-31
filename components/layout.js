@@ -25,34 +25,40 @@ export default function Layout({ children }) {
       <header>
         <nav className="navbar navbar-expand-lg bg-gradient shadow">
           <div className="container-fluid">
-            <a className="navbar-brand pb-2" href="/">
-              <Image
-                src="/../public/biere-petite.png"
-                alt="PA=anus"
-                width="50"
-                height="50"
-              />
-            </a>
-            <a className="navbar-brand" href="/">
-              <span className={style.noir}>Gaz</span>
-              <span className={style.jaune}>EDI</span>
-              <span className={style.rouge}>fication</span>
-            </a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNavDropdown"
-              aria-controls="navbarNavDropdown"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+            <div className="container">
+              <div className="float-start">
+                <a className="navbar-brand pb-2" href="/">
+                  <Image
+                    src="/../public/biere-petite.png"
+                    alt="PA=anus"
+                    width="50"
+                    height="50"
+                  />
+                </a>
+              </div>
+              <div className="float-start">
+                <a className="navbar-brand" href="/">
+                  <span className={style.noir}>Gaz</span>
+                  <span className={style.jaune}>EDI</span>
+                  <span className={style.rouge}>fication</span>
+                </a>
+              </div>
+              {/* <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
               <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNavDropdown">
+              </button> */}
+            </div>
+            {/* <div className="collapse navbar-collapse" id="navbarNavDropdown">
               <ul className="navbar-nav">
               </ul>
-            </div>
+            </div> */}
             {!user ? (
               <a href="/login">
                 <button type="button" className="btn loggin_button m-2">
