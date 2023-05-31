@@ -116,11 +116,14 @@ export const handleSave = async (userId) => {
 
 export const Update_user = async (id, userId) => {
   try {
-    const { data: user_history } = await supabase
+    console.log("ici", userId);
+    const { data: user_history, error } = await supabase
       .from("drink_history_v2")
       .select()
-      .match({ user_id: userId })
+      .eq("user_id", userId)
       .single();
+
+    console.log("la");
 
     // console.log(user_history);
     const updated_drink_history = user_history.drink_acts.concat(id); // crochets pour concatener ?
@@ -191,80 +194,94 @@ export default function Home({ beers }) {
         <div className="container">
           {userSession ? (
             <div>
-            <p className="current-status">
+              <p className="current-status">
                 Salut {username}, tu es actuellement à{" "}
-                <b> {currentDegree} g/L</b> {" "} {(currentDegree!=0)? "!" : "."}
-            </p>
-            <p className="comments">{comments(currentDegree)}
-            </p>
-            <div>
-              <button type="button" className="btn inner_button m-2" onClick={() => setOpenModal(!openModal)}>
-                j'ai bu ...
-              </button>
-              <a href="chart2">
-                <button type="button" className="btn inner_button m-2">
-                  afficher le graphique 
-                </button>
-              </a>
-              <Leaderboard leader_list={["Paul", "Simun", "Laura", "PA"]}></Leaderboard>
-            <FormModal isOpen={openModal} onClose={() => setOpenModal(false)}>
-              <FormModal.Header>Nouvelle consommation</FormModal.Header>
-              <FormModal.Body>
-                {/* Modal Body */}
-                <Form_v2 /> {/* Use Form to see previous version */}
-              </FormModal.Body>
-              <FormModal.Footer>
-                <FormModal.DismissButton className="modal-button-close">
-                  Annuler
-                </FormModal.DismissButton>
+                <b> {currentDegree} g/L</b> {currentDegree != 0 ? "!" : "."}
+              </p>
+              <p className="comments">{comments(currentDegree)}</p>
+              <div>
                 <button
-                  className="modal-button-save"
-                  onClick={() => {handleSave(userSession.id);setOpenModal(false)}}
+                  type="button"
+                  className="btn inner_button m-2"
+                  onClick={() => setOpenModal(!openModal)}
                 >
-                  Sauvegarder
+                  j'ai bu ...
                 </button>
-              </FormModal.Footer>
-            </FormModal>
-          </div>
-          </div>
+                <a href="chart2">
+                  <button type="button" className="btn inner_button m-2">
+                    afficher le graphique
+                  </button>
+                </a>
+                <Leaderboard
+                  leader_list={["Paul", "Simun", "Laura", "PA"]}
+                ></Leaderboard>
+                <FormModal
+                  isOpen={openModal}
+                  onClose={() => setOpenModal(false)}
+                >
+                  <FormModal.Header>Nouvelle consommation</FormModal.Header>
+                  <FormModal.Body>
+                    {/* Modal Body */}
+                    <Form_v2 /> {/* Use Form to see previous version */}
+                  </FormModal.Body>
+                  <FormModal.Footer>
+                    <FormModal.DismissButton className="modal-button-close">
+                      Annuler
+                    </FormModal.DismissButton>
+                    <button
+                      className="modal-button-save"
+                      onClick={() => {
+                        handleSave(userSession.id);
+                        setOpenModal(false);
+                      }}
+                    >
+                      Sauvegarder
+                    </button>
+                  </FormModal.Footer>
+                </FormModal>
+              </div>
+            </div>
           ) : null}
 
           {userSession ? (
             <div className="container week">
               <p>Ma semaine :</p>
-              <p><em>À faire : graphe en bâtons des statistiques de la semaine</em></p>
-              <div  className="right">
+              <p>
+                <em>
+                  À faire : graphe en bâtons des statistiques de la semaine
+                </em>
+              </p>
+              <div className="right">
                 <a href="/index">
-                    <button type="button" className="btn inner_button m-2">
-                      Mes statistiques
-                    </button>
+                  <button type="button" className="btn inner_button m-2">
+                    Mes statistiques
+                  </button>
                 </a>
               </div>
             </div>
           ) : null}
 
-          <div className="container events"> 
+          <div className="container events">
             <h3>Evènements à venir</h3>
-            <p><em>À faire : component évènement</em></p>
+            <p>
+              <em>À faire : component évènement</em>
+            </p>
             <div className="right">
-            <a href="/index">
-                    <button type="button" className="btn display">
-                      Voir tous les évènements
-                    </button>
-            </a>
+              <a href="/index">
+                <button type="button" className="btn display">
+                  Voir tous les évènements
+                </button>
+              </a>
             </div>
           </div>
 
-          <div>
-            { beers ? <BeerBoxes beers={beers}/> : null}
-          </div>
+          <div>{beers ? <BeerBoxes beers={beers} /> : null}</div>
           <button onClick={() => console.log(userSession)}>test</button>
         </div>
       </main>
     </Layout>
   );
 }
-
 
 const noUnderline = {
   textDecoration: "none",
@@ -287,4 +304,4 @@ const comments = (degree) => {
   } else {
     return "Tu es dans un état critique, tu devrais appeler les urgences !";
   }
-}
+};
