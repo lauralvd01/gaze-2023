@@ -57,7 +57,7 @@ const BeerBoxes = ({beers}) => {
 //    )
 //}
 
-import Image from 'next/image'
+// import Image from 'next/image'
 import mypic from '../public/DELIBLUE.png'
 
 const MyImage = ({name}) => {
@@ -73,8 +73,4 @@ const MyImage = ({name}) => {
     )
   }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 80fd34f63c426cdffbaa9da55f59aa1c2a9a424d
 export default BeerBoxes;
