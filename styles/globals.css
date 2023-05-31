@@ -142,3 +142,11 @@ footer {
   background-color: #283044;
   border: solid #283044;
 }
+
+.medalImage {
+  margin-right: 10px;
+}
+
+.leader_box {
+  border-color: #1e2433;
+}
