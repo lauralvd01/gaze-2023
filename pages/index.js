@@ -255,7 +255,7 @@ export default function Home({ beers }) {
             </div>
           </div>
 
-          <div>
+          <div className="container">
             { beers ? <BeerBoxes beers={beers}/> : null}
           </div>
           <button onClick={() => console.log(userSession)}>test</button>

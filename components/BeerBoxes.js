@@ -55,7 +55,7 @@ const MyImage = ({id}) => {
     return (
         <Image
           src= {impath}
-        //   className={style.exit_image}
+          className="beer_images"
           alt={impath}
           width="120"
           height="120"

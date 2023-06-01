@@ -157,3 +157,22 @@ footer {
 .leader_box h1 {
   margin-left: 10px;
 }
+
+.beer_images {
+  width: 50%;
+  height: 50%;
+}
+
+.col.beer_col {
+  width: 100%;
+}
+
+@media only screen and (max-device-width: 900px) {
+  .card-body {
+    font-size: 1em;
+  }
+  /* .card-title {
+    font-size: 10px;
+  } */
+
+}
