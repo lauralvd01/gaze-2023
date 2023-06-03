@@ -124,24 +124,7 @@ footer {
   border: solid #283044;
 }
 
-.card-img-top.beer_img {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
 
-.btn.beer_button {
-  text-align: center;
-  width: 80%;
-  border: solid #283044;
-  color: #283044;
-}
-
-.btn.beer_button:hover {
-  color: white;
-  background-color: #283044;
-  border: solid #283044;
-}
 
 .medalImage {
   margin-right: 10px;
@@ -158,10 +141,7 @@ footer {
   margin-left: 10px;
 }
 
-.beer_images {
-  width: 50%;
-  height: 50%;
-}
+
 
 .col.beer_col {
   width: 100%;
@@ -175,4 +155,46 @@ footer {
     font-size: 10px;
   } */
 
+}
+
+
+.card-img-top.beer_img {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+.card.beer_card {
+  background-color: #f5bb00;
+}
+
+.btn.beer_button {
+  text-align: center;
+  width: 80%;
+  border: solid #283044;
+  color: #283044;
+}
+
+.btn.beer_button:hover {
+  color: white;
+  background-color: #283044;
+  border: solid #283044;
+}
+
+.row.beer_row .col {
+  padding-right: 2px;
+  padding-left: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 80%;
+}
+
+.row.beer_row .card-title {
+  font-size: 90%;
+  text-align: center;
+}
+
+.row.beer_row .card-text {
+  margin-bottom: 2px;
 }

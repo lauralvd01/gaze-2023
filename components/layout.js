@@ -85,7 +85,8 @@ export default function Layout({ children }) {
         </nav>
       </header>
       <main>
-        <div className="container">{children}</div>
+        {children}
+        {/* <div className="container">{children}</div> */}
       </main>
       <footer className="shadow">
         <div className="container">

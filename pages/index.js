@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
 import Layout from "../components/layout";
 import Leaderboard from "@/components/leaderboard";
+// import Leaderboard as l2 from "@/components/Leaderboard";
 import { useUser } from "@supabase/auth-helpers-react";
 // Simon
 import Form_v2 from "./form_v2.js";
@@ -17,6 +18,7 @@ import ComputeDegree from "@/usefultools/ComputeDegree";
 import Link from "next/link";
 import { fontStyle } from "@mui/system";
 import BeerBoxes from "@/components/BeerBoxes";
+import BeerBoxes2 from "@/components/beerBoxes2";
 
 function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -274,13 +276,24 @@ export default function Home({ beers }) {
 
           <div>
             {beers ? (
-              <BeerBoxes
+              <BeerBoxes2 
                 beers={beers}
                 prefilledBeer={prefilledBeer}
                 setPrefilledBeer={setPrefilledBeer}
                 userId={userSession ? userSession.id : null}
               />
-            ) : null}
+              // beers.map((beer) => (
+              //   <>
+              //     <BeerBoxes2 beer={beer}/>
+              //   </>
+              )
+              // <BeerBoxes
+              //   beers={beers}
+              //   prefilledBeer={prefilledBeer}
+              //   setPrefilledBeer={setPrefilledBeer}
+              //   userId={userSession ? userSession.id : null}
+              // />
+             : null}
           </div>
           <button onClick={() => console.log(userSession)}>test</button>
         </div>
