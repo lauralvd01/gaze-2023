@@ -80,8 +80,15 @@ const Form_v2 = ({ prefilledBeer }) => {
               >
                 <option selected>Sélectionner</option>
                 <option value="Chouffe">Chouffe</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="Kasteel Triple">Kasteel Triple</option>
+                <option value="Cuvée Des Trolls">Cuvée Des Trolls</option>
+                <option value="Blanche des Neiges">Blanche des Neiges</option>
+                <option value="Desperados">Desperados</option>
+                <option value="Kriek">Kriek</option>
+                <option value="Delirium Red">Delirium Red</option>
+                <option value="Kasteel Red">Kasteel Red</option>
+                <option value="Delirium Bleue">Delirium Bleue</option>
+                <option value="Triple Karmeliet">Triple Karmeliet</option>
               </select>
             )}
           </div>

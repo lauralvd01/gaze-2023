@@ -282,18 +282,7 @@ export default function Home({ beers }) {
                 setPrefilledBeer={setPrefilledBeer}
                 userId={userSession ? userSession.id : null}
               />
-              // beers.map((beer) => (
-              //   <>
-              //     <BeerBoxes2 beer={beer}/>
-              //   </>
-              )
-              // <BeerBoxes
-              //   beers={beers}
-              //   prefilledBeer={prefilledBeer}
-              //   setPrefilledBeer={setPrefilledBeer}
-              //   userId={userSession ? userSession.id : null}
-              // />
-             : null}
+              ) : null}
           </div>
           <button onClick={() => console.log(userSession)}>test</button>
         </div>
