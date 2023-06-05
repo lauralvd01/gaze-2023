@@ -284,7 +284,7 @@ export default function Home({ beers }) {
               />
               ) : null}
           </div>
-          <button onClick={() => console.log(userSession)}>test</button>
+          {/* <button onClick={() => console.log(userSession)}>test</button> */}
         </div>
       </main>
     </Layout>
