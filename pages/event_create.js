@@ -1,44 +1,78 @@
+import { uuidv4 } from "@/usefultools/generalTools.js";
+import { useUser } from "@supabase/auth-helpers-react";
+import { supabase } from "../lib/supabaseClient";
+
 import Head from "next/head";
 import Layout from "../components/layout";
+import Link from "next/link";
+import {
+  DelayedDate,
+  MillisToDate,
+  DateTomillis,
+} from "@/usefultools/MillisDateConversion";
 
 const Event = () => {
-  let begining, hourBegining, end, hourEnd, title, details, nbParticipants, participantBool, author;
+  let begining, hourBegining, end, hourEnd, title, details;
+  let participantBool = true;
+  const userSession = useUser();
 
-
-
-
-  /*
-  let glasses, degree, timeSinceDrink, weight, sex;
-  let result;
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log([glasses, degree, timeSinceDrink, sex, weight]);
+    console.log("submitting ...");
+    // Transforming the date and hour into a timestamp
+    let beginingTimestamp = new Date(
+      begining + "T" + hourBegining + ":00"
+    ).getTime();
+    beginingTimestamp = DelayedDate(MillisToDate(beginingTimestamp), 120);
+    let endTimestamp = new Date(end + "T" + hourEnd + ":00").getTime();
+    endTimestamp = DelayedDate(MillisToDate(endTimestamp), 120);
+    console.log(beginingTimestamp);
+    console.log(endTimestamp);
 
-    // Change the name of the sex to its corresponding factor
-    switch (sex) {
-      case "femme":
-        sex = 0.6;
-        break;
-      case "homme":
-        sex = 0.7;
-        break;
-      case "autre":
-        sex = 0.75;
-        break;
+    const eventId = uuidv4();
+
+    console.log({
+      id: eventId,
+      title,
+      begining: beginingTimestamp,
+      end: endTimestamp,
+      details,
+      participants: participantBool ? 1 : 0,
+      author: userSession.id,
+    });
+
+    // Update the events table
+    await supabase
+      .from("event")
+      .insert({
+        id: eventId,
+        title,
+        begining: beginingTimestamp,
+        end: endTimestamp,
+        details,
+        participants: participantBool ? 1 : 0,
+        author: userSession.id,
+      })
+      .then(() => {
+        console.log("inserted event person into the database");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // Insert row to table participants
+    if (participantBool) {
+      await supabase
+        .from("participants")
+        .insert({
+          participant: userSession.id,
+          event: eventId,
+        })
+        .then(() => {
+          console.log("updated participants");
+        });
     }
-
-    // le 125 c'est parce que je suppose qu'un verre fait 125 mL
-    result = (degree * 0.01 * glasses * 125 * 0.8) / (sex * weight);
-
-    // NB : le pic est atteint environ 15min après à jeûn et jusqu'à 1h après si on est en train de manger. On suppose que c'est 30min pour tout le monde
-
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = `Ton taux d'alcoolémie est de ${(
-      Math.round((result - (0.2 * timeSinceDrink) / 60) * 100) / 100
-    ).toFixed(2)} g/L`;
   };
-  */
 
   return (
     <Layout>
@@ -54,176 +88,221 @@ const Event = () => {
         />
       </Head>
       <main>
-        <a href="/index">
+        <Link href="/">
           <button type="button" className="btn inner_button m-3 left">
             Retour
           </button>
-        </a>
+        </Link>
 
         <div className="container">
           <div style={localStyles.container}>
-          <form style={localStyles.container} action="form" method="post">
-          <div className="form-group row" style={localStyles.fieldContainer}>
-              <label
-                htmlFor="inputDay"
-                className="col-m-5 col-form-label modal-label"
+            <form style={localStyles.container} action="form" method="post">
+              <div
+                className="form-group row"
+                style={localStyles.fieldContainer}
               >
-                Jour de l'évènement
-              </label>
-              <div className="col-sm-5 modal-input">
-                <select
-                  id="inputDay"
-                  className="form-select bierasse_form"
-                  aria-label="Default select example"
+                {/* <label
+                  htmlFor="inputDay"
+                  className="col-m-5 col-form-label modal-label"
                 >
-                  <option value="Lundi">Lundi</option>
-                  <option value="Mardi">Mardi</option>
-                  <option value="Mercredi">Mercredi</option>
-                  <option value="Jeudi">Jeudi</option>
-                  <option value="Vendredi">Vendredi</option>
-                  <option value="Samedi">Samedi</option>
-                  <option value="Dimanche">Dimanche</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="form-group row" style={localStyles.fieldContainer}>
-              <label
-                htmlFor="inputEventBegining"
-                className="col-m-2 col-form-label modal-label"
-              >
-                Début de l'évènement
-              </label>
-              <div className="col-sm-8 modal-input">
-                <input
-                  type="date"
-                  pattern="[0-9,.]+"
-                  className="form-control"
-                  id="inputEventBegining"
-                  onChange={(input) => {
-                    begining = input.target.value;
-                    document
-                      .getElementById("inputEventBegining")
-                      .setAttribute("value", begining);
-                  }}
-                ></input>
-              </div>
-            </div>
-
-            <div className="form-group row" style={localStyles.fieldContainer}>
-              <div className="col-m-30 modal-input">
-                <label
-                  htmlFor="inputEventHourBegining"
-                  className="col-sm-25 col-form-label modal-label"
-                >
-                  Heure de début
+                  Jour de l évènement
                 </label>
-                <input
-                  type="time"
-                  pattern="[0-9,.]+"
-                  className="form-control"
-                  id="inputEventHourBegining"
-                  min={"00:00"}
-                  max={"23:59"}
-                  onChange={(input) => {
-                    hourBegining = input.target.value;
-                    console.log(typeof(hourBegining));
-                    document
-                      .getElementById("inputEventHourBegining")
-                      .setAttribute("value", hourBegining);
-                  }}
-                ></input>
+                <div className="col-sm-5 modal-input">
+                  <select
+                    id="inputDay"
+                    className="form-select bierasse_form"
+                    aria-label="Default select example"
+                  >
+                    <option value="Lundi">Lundi</option>
+                    <option value="Mardi">Mardi</option>
+                    <option value="Mercredi">Mercredi</option>
+                    <option value="Jeudi">Jeudi</option>
+                    <option value="Vendredi">Vendredi</option>
+                    <option value="Samedi">Samedi</option>
+                    <option value="Dimanche">Dimanche</option>
+                  </select>
+                </div> */}
               </div>
-            </div>
 
-            <div className="form-group row" style={localStyles.fieldContainer}>
-              <label
-                htmlFor="inputEventBegining"
-                className="col-m-2 col-form-label modal-label"
+              <div
+                className="form-group row"
+                style={localStyles.fieldContainer}
               >
-                Fin de l'évènement
-              </label>
-              <div className="col-sm-8 modal-input">
-                <input
-                  type="date"
-                  pattern="[0-9,.]+"
-                  className="form-control"
-                  id="inputEventEnd"
-                  onChange={(input) => {
-                    end = input.target.value;
-                    document
-                      .getElementById("inputEventEnd")
-                      .setAttribute("value", end);
-                  }}
-                ></input>
-              </div>
-            </div>
-
-            <div className="form-group row" style={localStyles.fieldContainer}>
-              <div className="col-m-30 modal-input">
                 <label
-                  htmlFor="inputEventHourEnd"
-                  className="col-sm-25 col-form-label modal-label"
+                  htmlFor="inputEventBegining"
+                  className="col-m-2 col-form-label modal-label"
                 >
-                  Heure de fin
+                  Début de l&apos;évènement
                 </label>
-                <input
-                  type="time"
-                  pattern="[0-9,.]+"
-                  className="form-control"
-                  id="inputEventHourEnd"
-                  min={"00:00"}
-                  max={"23:59"}
-                  onChange={(input) => {
-                    hourEnd = input.target.value;
-                    console.log(hourEnd);
-                    document
-                      .getElementById("inputEventHourEnd")
-                      .setAttribute("value", hourEnd);
-                  }}
-                ></input>
+                <div className="col-sm-8 modal-input">
+                  <input
+                    type="date"
+                    pattern="[0-9,.]+"
+                    className="form-control"
+                    id="inputEventBegining"
+                    onChange={(input) => {
+                      begining = input.target.value;
+                      console.log(begining);
+                      // document
+                      //   .getElementById("inputEventBegining")
+                      //   .setAttribute("value", begining);
+                    }}
+                  ></input>
+                </div>
               </div>
-            </div>
 
-            <div className="form-group row" style={localStyles.fieldContainer}>
-              <div className="col-sm-25 modal-input">
-                <input
-                  type="text"
-                  pattern="[0-9,.]+"
-                  className="form-control"
-                  id="inputEventTitle"
-                  placeholder="Titre de l'évènement"
-                  onChange={(input) => {
-                    title = input.target.value;
-                    document
-                      .getElementById("inputEventTitle")
-                      .setAttribute("value", title);
-                  }}
-                ></input>
+              <div
+                className="form-group row"
+                style={localStyles.fieldContainer}
+              >
+                <div className="col-m-30 modal-input">
+                  <label
+                    htmlFor="inputEventHourBegining"
+                    className="col-sm-25 col-form-label modal-label"
+                  >
+                    Heure de début
+                  </label>
+                  <input
+                    type="time"
+                    pattern="[0-9,.]+"
+                    className="form-control"
+                    id="inputEventHourBegining"
+                    min={"00:00"}
+                    max={"23:59"}
+                    onChange={(input) => {
+                      hourBegining = input.target.value;
+                      console.log(hourBegining);
+                      // document
+                      //   .getElementById("inputEventHourBegining")
+                      //   .setAttribute("value", hourBegining);
+                    }}
+                  ></input>
+                </div>
               </div>
-            </div>
 
-            <div className="form-group row" style={localStyles.fieldContainer}>
-              <div className="col-sm-25 modal-input">
+              <div
+                className="form-group row"
+                style={localStyles.fieldContainer}
+              >
+                <label
+                  htmlFor="inputEventBegining"
+                  className="col-m-2 col-form-label modal-label"
+                >
+                  Fin de l&apos;évènement
+                </label>
+                <div className="col-sm-8 modal-input">
+                  <input
+                    type="date"
+                    pattern="[0-9,.]+"
+                    className="form-control"
+                    id="inputEventEnd"
+                    onChange={(input) => {
+                      end = input.target.value;
+                      console.log(end);
+                      // document
+                      //   .getElementById("inputEventEnd")
+                      //   .setAttribute("value", end);
+                    }}
+                  ></input>
+                </div>
+              </div>
+
+              <div
+                className="form-group row"
+                style={localStyles.fieldContainer}
+              >
+                <div className="col-m-30 modal-input">
+                  <label
+                    htmlFor="inputEventHourEnd"
+                    className="col-sm-25 col-form-label modal-label"
+                  >
+                    Heure de fin
+                  </label>
+                  <input
+                    type="time"
+                    pattern="[0-9,.]+"
+                    className="form-control"
+                    id="inputEventHourEnd"
+                    min={"00:00"}
+                    max={"23:59"}
+                    onChange={(input) => {
+                      hourEnd = input.target.value;
+                      console.log(hourEnd);
+                      // document
+                      //   .getElementById("inputEventHourEnd")
+                      //   .setAttribute("value", hourEnd);
+                    }}
+                  ></input>
+                </div>
+              </div>
+
+              <div
+                className="form-group row"
+                style={localStyles.fieldContainer}
+              >
+                <div className="col-sm-25 modal-input">
+                  <input
+                    type="text"
+                    pattern="[0-9,.]+"
+                    className="form-control"
+                    id="inputEventTitle"
+                    placeholder="Titre de l'évènement"
+                    onChange={(input) => {
+                      title = input.target.value;
+                      console.log(title);
+                      // document
+                      //   .getElementById("inputEventTitle")
+                      //   .setAttribute("value", title);
+                    }}
+                  ></input>
+                </div>
+              </div>
+
+              <div
+                className="form-group row"
+                style={localStyles.fieldContainer}
+              >
+                <div className="col-sm-25 modal-input">
+                  <input
+                    type="text"
+                    pattern="[0-9,.]+"
+                    className="form-control"
+                    id="inputEventDetails"
+                    placeholder="Détails (organisateur, lieu, dresscode, etc.)"
+                    onChange={(input) => {
+                      details = input.target.value;
+                      console.log(details);
+                      // document
+                      //   .getElementById("inputEventDetails")
+                      //   .setAttribute("value", details);
+                    }}
+                  ></input>
+                </div>
+              </div>
+
+              <div className="form-check">
                 <input
-                  type="text"
-                  pattern="[0-9,.]+"
-                  className="form-control"
-                  id="inputEventDetails"
-                  placeholder="Détails (organisateur, lieu, dresscode, etc.)"
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexChecked"
+                  defaultChecked={true}
                   onChange={(input) => {
-                    details = input.target.value;
-                    document
-                      .getElementById("inputEventDetails")
-                      .setAttribute("value", details);
+                    participantBool = input.target.checked;
+                    console.log("participantBool", participantBool);
                   }}
                 ></input>
+                <label className="form-check-label" htmlFor="flexCheckChecked">
+                  Je participe
+                </label>
               </div>
-            </div>
-      </form>
-    </div>
-      
-    </div>
+
+              <button className="btn btn-primary" onClick={handleSubmit}>
+                Valider
+              </button>
+            </form>
+          </div>
+        </div>
       </main>
     </Layout>
   );
