@@ -33,7 +33,7 @@ const ComputeDegree = async (userID, time = Date.now()) => {
     let sex_ratio; // Index of alcohol absorption
     switch (user.gender) {
       case "female":
-        sex_ratio = 0.8;
+        sex_ratio = 0.6;
         break;
       case "male":
         sex_ratio = 0.7;

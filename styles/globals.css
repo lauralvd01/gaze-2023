@@ -12,8 +12,32 @@ footer {
   color: #ebf5ee;
 }
 
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
 .container {
   padding: 10px;
+}
+
+.container.week {
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+.container.events {
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+.warning {
+  text-align: center;
+  font-size: small;
+  font-style: italic;
 }
 
 .btn.loggin_button {
@@ -27,6 +51,150 @@ footer {
   color: #1e2433;
 }
 
+.btn.goto {
+  background-color: #f5bb00;
+  border-color: black;
+  font-size: small;
+}
+
+.btn.goto:hover {
+  background-color: #ffcb1f;
+  border-color: #1e2433;
+  color: #1e2433;
+}
+
+.btn.display {
+  color: white;
+  text-decoration: underline;
+}
+
+.btn.display:hover {
+  color: #ffcb1f;
+  font-style: bold;
+  text-decoration: underline;
+}
+
 .container.logging-container {
   max-width: 600px;
+}
+
+.current-status {
+  text-align: center;
+  font-size: x-large;
+  font-style: bold;
+}
+
+.comments {
+  text-align: right;
+  font-style: italic;
+  color: #ffcb1f;
+}
+
+.btn.add-drink {
+  background-color: #fdc166;
+  border-color: white;
+  color: black;
+  font-size: medium;
+  width: 20%;
+  height: auto;
+  margin-left: 10%;
+}
+
+.btn.inner_button {
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: #f5bb00;
+  border-color: black;
+}
+
+.btn.inner_button:hover {
+  background-color: #ffcb1f;
+  border-color: #1e2433;
+  color: #1e2433;
+}
+
+.btn.chart_button {
+  border: solid #283044;
+  color: #283044;
+}
+
+.btn.chart_button:hover {
+  color: white;
+  background-color: #283044;
+  border: solid #283044;
+}
+
+
+
+.medalImage {
+  margin-right: 10px;
+}
+
+.leader_box {
+  border-color: solid #fdc166;
+  background-color: white;
+  color: #1e2433;
+  border-radius: 6px;
+}
+
+.leader_box h1 {
+  margin-left: 10px;
+}
+
+
+
+.col.beer_col {
+  width: 100%;
+}
+
+@media only screen and (max-device-width: 900px) {
+  .card-body {
+    font-size: 1em;
+  }
+  /* .card-title {
+    font-size: 10px;
+  } */
+
+}
+
+
+.card-img-top.beer_img {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+.card.beer_card {
+  background-color: #f5bb00;
+}
+
+.btn.beer_button {
+  text-align: center;
+  width: 80%;
+  border: solid #283044;
+  color: #283044;
+}
+
+.btn.beer_button:hover {
+  color: white;
+  background-color: #283044;
+  border: solid #283044;
+}
+
+.row.beer_row .col {
+  padding-right: 2px;
+  padding-left: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 80%;
+}
+
+.row.beer_row .card-title {
+  font-size: 90%;
+  text-align: center;
+}
+
+.row.beer_row .card-text {
+  margin-bottom: 2px;
 }

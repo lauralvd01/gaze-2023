@@ -25,43 +25,40 @@ export default function Layout({ children }) {
       <header>
         <nav className="navbar navbar-expand-lg bg-gradient shadow">
           <div className="container-fluid">
-            <a className="navbar-brand pb-2" href="/">
-              <Image
-                src="/../public/biere-petite.png"
-                alt="PA=anus"
-                width="50"
-                height="50"
-              />
-            </a>
-            <a className="navbar-brand" href="/">
-              <span className={style.noir}>Gaz</span>
-              <span className={style.jaune}>EDI</span>
-              <span className={style.rouge}>fication</span>
-            </a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNavDropdown"
-              aria-controls="navbarNavDropdown"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+            <div className="container">
+              <div className="float-start">
+                <a className="navbar-brand pb-2" href="/">
+                  <Image
+                    src="/../public/biere-petite.png"
+                    alt="PA=anus"
+                    width="50"
+                    height="50"
+                  />
+                </a>
+              </div>
+              <div className="float-start">
+                <a className="navbar-brand" href="/">
+                  <span className={style.noir}>Gaz</span>
+                  <span className={style.jaune}>EDI</span>
+                  <span className={style.rouge}>fication</span>
+                </a>
+              </div>
+              {/* <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
               <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <a
-                    className="nav-link active"
-                    aria-current="page"
-                    href="/simulator"
-                  >
-                    simulateur
-                  </a>
-                </li>
-              </ul>
+              </button> */}
             </div>
+            {/* <div className="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul className="navbar-nav">
+              </ul>
+            </div> */}
             {!user ? (
               <a href="/login">
                 <button type="button" className="btn loggin_button m-2">
@@ -88,10 +85,12 @@ export default function Layout({ children }) {
         </nav>
       </header>
       <main>
-        <div className="container">{children}</div>
+        {children}
+        {/* <div className="container">{children}</div> */}
       </main>
       <footer className="shadow">
         <div className="container">
+          <p className="warning"> Attention l'abus d'alcool est dangereux pour la santé !</p>
           <div className="row">
             <div className="col">
               <div className="container">
@@ -112,7 +111,7 @@ export default function Layout({ children }) {
                 </a>
                 <a
                   className="navbar-brand"
-                  href="https://www.linkedin.com/in/paul-cambon54/"
+                  href="https://github.com/lauralvd01/gaze-2023"
                 >
                   <p>Github du projet</p>
                 </a>

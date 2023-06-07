@@ -1,4 +1,6 @@
-const Form_v2 = () => {
+import { useEffect, useState } from "react";
+
+const Form_v2 = ({ prefilledBeer }) => {
   let glasses, degree, timeSinceDrink, weight, sex;
   let result;
 
@@ -9,7 +11,7 @@ const Form_v2 = () => {
     // Change the name of the sex to its corresponding factor
     switch (sex) {
       case "femme":
-        sex = 0.8;
+        sex = 0.6;
         break;
       case "homme":
         sex = 0.7;
@@ -51,6 +53,9 @@ const Form_v2 = () => {
               placeholder="Verres"
               onChange={(input) => {
                 glasses = parseFloat(input.target.value.replaceAll(",", "."));
+                document
+                  .getElementById("inputGlassesDrank")
+                  .setAttribute("value", glasses);
               }}
             ></input>
           </div>
@@ -63,16 +68,29 @@ const Form_v2 = () => {
             Nom de la boisson {/* FAIRE UN MENU DEROULANT */}
           </label>
           <div className="col-sm-10 modal-input">
-            <input
-              type="text"
-              pattern="[0-9]+"
-              className="form-control"
-              id="inputDrink"
-              placeholder="Biérasse..."
-              onChange={(input) => {
-                degree = input.target.value; // to change
-              }}
-            ></input>
+            {prefilledBeer ? (
+              <option id="inputDrink" value={prefilledBeer}>
+                {prefilledBeer}
+              </option>
+            ) : (
+              <select
+                id="inputDrink"
+                class="form-select bierasse_form"
+                aria-label="Default select example"
+              >
+                <option selected>Sélectionner</option>
+                <option value="Chouffe">Chouffe</option>
+                <option value="Kasteel Triple">Kasteel Triple</option>
+                <option value="Cuvée Des Trolls">Cuvée Des Trolls</option>
+                <option value="Blanche des Neiges">Blanche des Neiges</option>
+                <option value="Desperados">Desperados</option>
+                <option value="Kriek">Kriek</option>
+                <option value="Delirium Red">Delirium Red</option>
+                <option value="Kasteel Red">Kasteel Red</option>
+                <option value="Delirium Bleue">Delirium Bleue</option>
+                <option value="Triple Karmeliet">Triple Karmeliet</option>
+              </select>
+            )}
           </div>
         </div>
 
@@ -92,6 +110,9 @@ const Form_v2 = () => {
               placeholder="Temps"
               onChange={(input) => {
                 timeSinceDrink = parseInt(input.target.value);
+                document
+                  .getElementById("inputTime")
+                  .setAttribute("value", timeSinceDrink);
               }}
             ></input>
           </div>

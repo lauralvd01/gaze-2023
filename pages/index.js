@@ -1,9 +1,11 @@
 import { supabase } from "../lib/supabaseClient";
+import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
 import Layout from "../components/layout";
+import Leaderboard from "@/components/leaderboard";
+// import Leaderboard as l2 from "@/components/Leaderboard";
 import { useUser } from "@supabase/auth-helpers-react";
 // Simon
-import Form from "./form.js";
 import Form_v2 from "./form_v2.js";
 import { use, useEffect, useState } from "react";
 import FormModal from "@/components/FormModal";
@@ -14,6 +16,9 @@ import {
 } from "@/usefultools/MillisDateConversion";
 import ComputeDegree from "@/usefultools/ComputeDegree";
 import Link from "next/link";
+import { fontStyle } from "@mui/system";
+import BeerBoxes from "@/components/BeerBoxes";
+import BeerBoxes2 from "@/components/beerBoxes2";
 
 function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -68,7 +73,6 @@ export const handleList_acts = async (userId) => {
 // Given a user id, a beverage and a delay, the following function will upload to the database a row in the drink history
 export const handleSave = async (userId) => {
   let delay = document.getElementById("inputTime").value;
-
   var date = DelayedDate(new Date(), delay);
   var foo = date.getDate;
   let day = foo.call(date);
@@ -133,6 +137,7 @@ export const Update_user = async (id, userId) => {
 
 export default function Home({ beers }) {
   const [openModal, setOpenModal] = useState(false);
+  const [prefilledBeer, setPrefilledBeer] = useState("Chouffe"); // TODO : set to null
   const userSession = useUser();
   const [username, setUsername] = useState("<Fetching ...>");
   const [currentDegree, setCurrentDegree] = useState(0);
@@ -156,9 +161,10 @@ export default function Home({ beers }) {
     }
   }, [userSession]);
 
+  // <button onClick={handleList}>List drink history in console</button>
   const handleList = () => {
     supabase
-      .from("drink_history")
+      .from("drink_history_v2")
       .select("*")
       .then((result) => {
         console.log(result.data);
@@ -179,65 +185,104 @@ export default function Home({ beers }) {
         />
       </Head>
       <main>
-        <button>
-          <Link style={noUnderline} href="chart2">
-            Go to chart
-          </Link>
-        </button>
-        <button onClick={handleList}>List drink history in console</button>
-        {userSession ? (
-          <div>
-            <button onClick={() => setOpenModal(!openModal)}>
-              Entrer une consommation
-            </button>
-            <FormModal isOpen={openModal} onClose={() => setOpenModal(false)}>
-              <FormModal.Header>Nouvelle consommation</FormModal.Header>
-              <FormModal.Body>
-                {/* Modal Body */}
-                <Form_v2 /> {/* Use Form to see previous version */}
-              </FormModal.Body>
-              <FormModal.Footer>
-                <FormModal.DismissButton className="modal-button-close">
-                  Annuler
-                </FormModal.DismissButton>
-                <button
-                  className="modal-button-save"
-                  onClick={() => handleSave(userSession.id)}
-                >
-                  Sauvegarder
-                </button>
-                <button className="modal-button-save" onClick={handleAddPerson}>
-                  ajouter personne
-                </button>
-                <button className="modal-button-save" onClick={handleList_v2}>
-                  lister personnes
-                </button>
-                <button
-                  className="modal-button-save"
-                  onClick={async () => handleList_acts(userSession.id)}
-                >
-                  lsit acts
-                </button>
-              </FormModal.Footer>
-            </FormModal>
-          </div>
-        ) : null}
+        {/* <a href="chart2">
+          <button type="button" className="btn inner_button m-2">
+            afficher le graphique 
+          </button>
+        </a> */}
         <div className="container">
           {userSession ? (
             <div>
-              <span>
+              <p className="current-status">
                 Salut {username}, tu es actuellement à{" "}
-                <b> {currentDegree} g/L</b>
-                de sang
-              </span>
+                <b> {currentDegree} g/L</b> {currentDegree != 0 ? "!" : "."}
+              </p>
+              <p className="comments">{comments(currentDegree)}</p>
+              <div>
+                <button
+                  type="button"
+                  className="btn inner_button m-2"
+                  onClick={() => setOpenModal(!openModal)}
+                >
+                  j'ai bu ...
+                </button>
+                <a href="chart2">
+                  <button type="button" className="btn inner_button m-2">
+                    afficher le graphique
+                  </button>
+                </a>
+                <Leaderboard/>
+                <FormModal
+                  isOpen={openModal}
+                  onClose={() => setOpenModal(false)}
+                >
+                  <FormModal.Header>Nouvelle consommation</FormModal.Header>
+                  <FormModal.Body>
+                    {/* Modal Body */}
+                    <Form_v2 /> {/* Use Form to see previous version */}
+                  </FormModal.Body>
+                  <FormModal.Footer>
+                    <FormModal.DismissButton className="modal-button-close">
+                      Annuler
+                    </FormModal.DismissButton>
+                    <button
+                      className="modal-button-save"
+                      onClick={() => {
+                        handleSave(userSession.id);
+                        setOpenModal(false);
+                      }}
+                    >
+                      Sauvegarder
+                    </button>
+                  </FormModal.Footer>
+                </FormModal>
+              </div>
             </div>
           ) : null}
-          <ul>
-            {beers
-              ? beers.map((beer) => <li key={beer.id}>{beer.name}</li>)
-              : null}
-          </ul>
-          <button onClick={() => console.log(userSession)}>test</button>
+
+          {userSession ? (
+            <div className="container week">
+              <p>Ma semaine :</p>
+              <p>
+                <em>
+                  À faire : graphe en bâtons des statistiques de la semaine
+                </em>
+              </p>
+              <div className="right">
+                <a href="/index">
+                  <button type="button" className="btn inner_button m-2">
+                    Mes statistiques
+                  </button>
+                </a>
+              </div>
+            </div>
+          ) : null}
+
+          <div className="container events">
+            <h3>Evènements à venir</h3>
+            <p>
+              <em>À faire : component évènement</em>
+            </p>
+            <div className="right">
+              <a href="/index">
+                <button type="button" className="btn display">
+                  Voir tous les évènements
+                </button>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            {beers ? (
+              <BeerBoxes2 
+                beers={beers}
+                prefilledBeer={prefilledBeer}
+                setPrefilledBeer={setPrefilledBeer}
+                userId={userSession ? userSession.id : null}
+              />
+              ) : null}
+          </div>
+          {/* <button onClick={() => console.log(userSession)}>test</button> */}
         </div>
       </main>
     </Layout>
@@ -246,4 +291,23 @@ export default function Home({ beers }) {
 
 const noUnderline = {
   textDecoration: "none",
+};
+
+const comments = (degree) => {
+  console.log(degree);
+  if (degree == 0) {
+    return "Tu n'as rien bu, tu es sobre !";
+  } else if (degree < 0.5) {
+    return "Tu es en dessous de la limite légale pour conduire, mais tu es quand même un peu pompette !";
+  } else if (degree < 1) {
+    return "Tu es au dessus de la limite légale pour conduire, mais tu n'es sans doute pas encore bourré(e) !";
+  } else if (degree < 1.5) {
+    return "Tu es bourré(e), mais tu peux encore te déplacer sans trop de problème !";
+  } else if (degree < 2) {
+    return "Tu es complètement bourré(e), tu devrais peut-être rentrer chez toi !";
+  } else if (degree < 2.5) {
+    return "Demain tu auras la gueule de bois, mais ce soir tu es complètement déchiré(e) !";
+  } else {
+    return "Tu es dans un état critique, tu devrais appeler les urgences !";
+  }
 };
