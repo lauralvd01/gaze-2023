@@ -260,6 +260,11 @@ export default function Home({ beers }) {
 
           <div className="container events">
             <h3>Evènements à venir</h3>
+            <a href="/event_create">
+              <button type="button" className="btn inner_button m-2 right">
+                Créer un évènement
+              </button>
+            </a>
             <p>
               <em>À faire : component évènement</em>
             </p>
