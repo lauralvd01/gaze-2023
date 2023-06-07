@@ -265,11 +265,11 @@ export default function Home({ beers }) {
               <em>À faire : component évènement</em>
             </p>
             <div className="right">
-              <a href="/index">
+              <Link href="/index">
                 <button type="button" className="btn display">
                   Voir tous les évènements
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
 
