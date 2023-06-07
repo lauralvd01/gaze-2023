@@ -26,7 +26,7 @@ export default function BeerBoxes2({
               <div className="card-body">
                 <p className="card-text">Degré : {beer.degree}</p>
                 <p className="card-text">Prix : {beer.price} €</p>
-                <p className="" card-text>
+                <p className="card-text">
                   Quantité : {beer.litrage}
                 </p>
                 <p className="card-text">
