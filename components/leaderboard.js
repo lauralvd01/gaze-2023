@@ -18,7 +18,7 @@ export default function Leaderboard(){
     return(
         <div className="leader_box">
             <h1>Le classement des champions :</h1>
-            <ul class="list-group">
+            <ul className="list-group">
                 {degrees == []
                     ? (
                         <li className="list-group-item">
@@ -27,7 +27,7 @@ export default function Leaderboard(){
                     )
                     : degrees.filter(obj => obj.degree != 0).map((degree, index) => {
                         return (
-                            <li class="list-group-item">
+                            <li className="list-group-item">
                                 {index == 0?(
                                     <>
                                         <Image

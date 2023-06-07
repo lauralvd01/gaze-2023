@@ -30,6 +30,8 @@ import { useState } from "react";
 import ComputeDegree from "@/usefultools/ComputeDegree";
 import ComputeAllDegree from "@/usefultools/ComputeAllDegrees";
 import { DelayedDate } from "@/usefultools/MillisDateConversion";
+import Link from 'next/link'
+
 
 const Chart = () => {
   const [users, setUsers] = useState([]);
@@ -131,11 +133,11 @@ const Chart = () => {
       >
         coo
       </button> */}
-      <a href="/">
+      <Link href="/">
         <button type="button" className="btn chart_button m-2">
           Retour
         </button>
-      </a>
+      </Link>
       {null}
       {data ? (
         <Line data={data} width={100} height={40} options={options} />
