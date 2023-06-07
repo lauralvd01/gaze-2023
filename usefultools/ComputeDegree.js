@@ -45,17 +45,16 @@ const ComputeDegree = async (userID, time = Date.now()) => {
 
     // Compute the degree of the user
     for (let i = 0; i < drink_acts.length; i++) {
-      const { data: drink_degree } = await supabase
+      const { data: drink } = await supabase
         .from("beers")
-        .select("degree")
+        .select("degree,litrage")
         .eq("name", drink_acts[i].beer_name)
         .single();
-      // console.log(drink_degree.degree);
       let degreeContribution =
-        (drink_degree.degree *
+        (drink.degree *
           0.01 *
           drink_acts[i].glasses_amount *
-          125 *
+          drink.litrage *
           0.8) /
         (sex_ratio * user.weight);
       // console.log("raw degreeContribution ", degreeContribution);
