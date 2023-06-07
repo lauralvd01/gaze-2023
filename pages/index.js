@@ -211,9 +211,7 @@ export default function Home({ beers }) {
                     afficher le graphique
                   </button>
                 </a>
-                <Leaderboard
-                  leader_list={["Paul", "Simun", "Laura", "PA"]}
-                ></Leaderboard>
+                <Leaderboard/>
                 <FormModal
                   isOpen={openModal}
                   onClose={() => setOpenModal(false)}
