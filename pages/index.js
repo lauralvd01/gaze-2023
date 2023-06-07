@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
 import Layout from "../components/layout";
 import Leaderboard from "@/components/leaderboard";
+// import Leaderboard as l2 from "@/components/Leaderboard";
 import { useUser } from "@supabase/auth-helpers-react";
 // Simon
 import Form_v2 from "./form_v2.js";
@@ -17,6 +18,7 @@ import ComputeDegree from "@/usefultools/ComputeDegree";
 import Link from "next/link";
 import { fontStyle } from "@mui/system";
 import BeerBoxes from "@/components/BeerBoxes";
+import BeerBoxes2 from "@/components/beerBoxes2";
 
 function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
@@ -71,7 +73,6 @@ export const handleList_acts = async (userId) => {
 // Given a user id, a beverage and a delay, the following function will upload to the database a row in the drink history
 export const handleSave = async (userId) => {
   let delay = document.getElementById("inputTime").value;
-
   var date = DelayedDate(new Date(), delay);
   var foo = date.getDate;
   let day = foo.call(date);
@@ -139,6 +140,7 @@ export const Update_user = async (id, userId) => {
 
 export default function Home({ beers }) {
   const [openModal, setOpenModal] = useState(false);
+  const [prefilledBeer, setPrefilledBeer] = useState("Chouffe"); // TODO : set to null
   const userSession = useUser();
   const [username, setUsername] = useState("<Fetching ...>");
   const [currentDegree, setCurrentDegree] = useState(0);
@@ -212,9 +214,7 @@ export default function Home({ beers }) {
                     afficher le graphique
                   </button>
                 </a>
-                <Leaderboard
-                  leader_list={["Paul", "Simun", "Laura", "PA"]}
-                ></Leaderboard>
+                <Leaderboard />
                 <FormModal
                   isOpen={openModal}
                   onClose={() => setOpenModal(false)}
@@ -275,8 +275,17 @@ export default function Home({ beers }) {
             </div>
           </div>
 
-          <div>{beers ? <BeerBoxes beers={beers} /> : null}</div>
-          <button onClick={() => console.log(userSession)}>test</button>
+          <div>
+            {beers ? (
+              <BeerBoxes2
+                beers={beers}
+                prefilledBeer={prefilledBeer}
+                setPrefilledBeer={setPrefilledBeer}
+                userId={userSession ? userSession.id : null}
+              />
+            ) : null}
+          </div>
+          {/* <button onClick={() => console.log(userSession)}>test</button> */}
         </div>
       </main>
     </Layout>

@@ -124,10 +124,49 @@ footer {
   border: solid #283044;
 }
 
+
+
+.medalImage {
+  margin-right: 10px;
+}
+
+.leader_box {
+  border-color: solid #fdc166;
+  background-color: white;
+  color: #1e2433;
+  border-radius: 6px;
+}
+
+.leader_box h1 {
+  margin-left: 10px;
+}
+
+
+
+.col.beer_col {
+  width: 100%;
+}
+
+@media only screen and (max-device-width: 900px) {
+  .card-body {
+    font-size: 1em;
+  }
+  /* .card-title {
+    font-size: 10px;
+  } */
+
+}
+
+
 .card-img-top.beer_img {
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
+
+}
+
+.card.beer_card {
+  background-color: #f5bb00;
 }
 
 .btn.beer_button {
@@ -143,17 +182,19 @@ footer {
   border: solid #283044;
 }
 
-.medalImage {
-  margin-right: 10px;
+.row.beer_row .col {
+  padding-right: 2px;
+  padding-left: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 80%;
 }
 
-.leader_box {
-  border-color: solid #fdc166;
-  background-color: white;
-  color: #1e2433;
-  border-radius: 6px;
+.row.beer_row .card-title {
+  font-size: 90%;
+  text-align: center;
 }
 
-.leader_box h1 {
-  margin-left: 10px;
+.row.beer_row .card-text {
+  margin-bottom: 2px;
 }

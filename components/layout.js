@@ -85,7 +85,8 @@ export default function Layout({ children }) {
         </nav>
       </header>
       <main>
-        <div className="container">{children}</div>
+        {children}
+        {/* <div className="container">{children}</div> */}
       </main>
       <footer className="shadow">
         <div className="container">
@@ -110,7 +111,7 @@ export default function Layout({ children }) {
                 </a>
                 <a
                   className="navbar-brand"
-                  href="https://www.linkedin.com/in/paul-cambon54/"
+                  href="https://github.com/lauralvd01/gaze-2023"
                 >
                   <p>Github du projet</p>
                 </a>
