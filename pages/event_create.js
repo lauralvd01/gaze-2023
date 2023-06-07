@@ -17,34 +17,23 @@ const Event = () => {
   const userSession = useUser();
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log("submitting ...");
-    // Transforming the date and hour into a timestamp
-    let beginingTimestamp = new Date(
-      begining + "T" + hourBegining + ":00"
-    ).getTime();
-    beginingTimestamp = DelayedDate(MillisToDate(beginingTimestamp), 120);
-    let endTimestamp = new Date(end + "T" + hourEnd + ":00").getTime();
-    endTimestamp = DelayedDate(MillisToDate(endTimestamp), 120);
-    console.log(beginingTimestamp);
-    console.log(endTimestamp);
+    if (userSession) {
+      event.preventDefault();
+      document.getElementById("validate-error").innerHTML = "";
+      console.log("submitting ...");
+      // Transforming the date and hour into a timestamp
+      let beginingTimestamp = new Date(
+        begining + "T" + hourBegining + ":00"
+      ).getTime();
+      beginingTimestamp = DelayedDate(MillisToDate(beginingTimestamp), 120);
+      let endTimestamp = new Date(end + "T" + hourEnd + ":00").getTime();
+      endTimestamp = DelayedDate(MillisToDate(endTimestamp), 120);
+      console.log(beginingTimestamp);
+      console.log(endTimestamp);
 
-    const eventId = uuidv4();
+      const eventId = uuidv4();
 
-    console.log({
-      id: eventId,
-      title,
-      begining: beginingTimestamp,
-      end: endTimestamp,
-      details,
-      participants: participantBool ? 1 : 0,
-      author: userSession.id,
-    });
-
-    // Update the events table
-    await supabase
-      .from("event")
-      .insert({
+      console.log({
         id: eventId,
         title,
         begining: beginingTimestamp,
@@ -52,25 +41,42 @@ const Event = () => {
         details,
         participants: participantBool ? 1 : 0,
         author: userSession.id,
-      })
-      .then(() => {
-        console.log("inserted event person into the database");
-      })
-      .catch((error) => {
-        console.log(error);
       });
 
-    // Insert row to table participants
-    if (participantBool) {
+      // Update the events table
       await supabase
-        .from("participants")
+        .from("event")
         .insert({
-          participant: userSession.id,
-          event: eventId,
+          id: eventId,
+          title,
+          begining: beginingTimestamp,
+          end: endTimestamp,
+          details,
+          participants: participantBool ? 1 : 0,
+          author: userSession.id,
         })
         .then(() => {
-          console.log("updated participants");
+          console.log("inserted event person into the database");
+        })
+        .catch((error) => {
+          console.log(error);
         });
+
+      // Insert row to table participants
+      if (participantBool) {
+        await supabase
+          .from("participants")
+          .insert({
+            participant: userSession.id,
+            event: eventId,
+          })
+          .then(() => {
+            console.log("updated participants");
+          });
+      }
+    } else {
+      document.getElementById("validate-error").innerHTML =
+        "Vous devez être connecté pour créer un évènement";
     }
   };
 
@@ -300,6 +306,7 @@ const Event = () => {
               <button className="btn btn-primary" onClick={handleSubmit}>
                 Valider
               </button>
+              <p style={{ color: "#ff0000" }} id="validate-error"></p>
             </form>
           </div>
         </div>
