@@ -9,7 +9,7 @@ async function signInWithEmail() {
   });
 }
 
-function auth(props) {
+function Auth(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -42,4 +42,4 @@ function auth(props) {
   );
 }
 
-export default auth;
+export default Auth;

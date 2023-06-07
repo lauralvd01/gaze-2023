@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Form_v2 = ({ prefilledBeer }) => {
+const Form_v2 = ({ prefilledBeer, prefilledGlass = false }) => {
   let glasses, degree, timeSinceDrink, weight, sex;
   let result;
 
@@ -22,6 +22,7 @@ const Form_v2 = ({ prefilledBeer }) => {
     }
 
     // le 125 c'est parce que je suppose qu'un verre fait 125 mL
+    // ATTENTION ce truc n'est finalement plus utilisé mais au cas où on a changé c'est plus 125
     result = (degree * 0.01 * glasses * 125 * 0.8) / (sex * weight);
 
     // NB : le pic est atteint environ 15min après à jeûn et jusqu'à 1h après si on est en train de manger. On suppose que c'est 30min pour tout le monde
@@ -42,7 +43,7 @@ const Form_v2 = ({ prefilledBeer }) => {
             htmlFor="inputGlassesDrank"
             className="col-sm-2 col-form-label modal-label"
           >
-            Nombre de verres bus
+            Nombre de bières bues
           </label>
           <div className="col-sm-10 modal-input">
             <input
@@ -50,7 +51,8 @@ const Form_v2 = ({ prefilledBeer }) => {
               pattern="[0-9,.]+"
               className="form-control"
               id="inputGlassesDrank"
-              placeholder="Verres"
+              placeholder={prefilledGlass ? 1 : "Verres"}
+              defaultValue={prefilledGlass ? 1 : null}
               onChange={(input) => {
                 glasses = parseFloat(input.target.value.replaceAll(",", "."));
                 document
