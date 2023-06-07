@@ -11,8 +11,8 @@ export default function BeerBoxes2 ({beers, prefilledBeer, setPrefilledBeer, use
     return (
         <div className="container">
             <div className="row beer_row">
-                {beers.map((beer) =>(
-                        <div className="col col-lg-2 col-6">
+                {beers.map((beer, index) =>(
+                        <div className="col col-lg-2 col-6" key={index}>
                             <div className="card beer_card">
                                 <div className="card-header">
                                     <div className="card-img-top beer_img">
@@ -23,7 +23,7 @@ export default function BeerBoxes2 ({beers, prefilledBeer, setPrefilledBeer, use
                                 <div className="card-body">
                                     <p className="card-text">Degré : {beer.degree}</p>
                                     <p className="card-text">Prix : {beer.price} €</p>
-                                    <p className=""card-text>
+                                    <p className="card-text">
                                         Quantité : {beer.litrage}
                                     </p>
                                     <p className="card-text">
