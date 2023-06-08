@@ -1,4 +1,6 @@
+
 {
-  "extands" : "eslint.enable"
-  // "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": { "react/no-unescaped-entities": 0 },
+  "eslint.enable": false
 }
