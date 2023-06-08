@@ -30,7 +30,7 @@ export default function Leaderboard() {
               return (
                 <li key={index} className="list-group-item">
                   {index == 0 ? (
-                    <>
+                    <div key={0}>
                       <Image
                         src="/../public/medalGold.png"
                         alt="Bootstrap"
@@ -38,9 +38,9 @@ export default function Leaderboard() {
                         width="32"
                         height="30"
                       />
-                    </>
+                    </div>
                   ) : index == 1 ? (
-                    <>
+                    <div key={1}>
                       <Image
                         src="/../public/medalSilver.png"
                         alt="Bootstrap"
@@ -48,9 +48,9 @@ export default function Leaderboard() {
                         width="32"
                         height="30"
                       />
-                    </>
+                    </div>
                   ) : index == 2 ? (
-                    <>
+                    <div key={2}>
                       <Image
                         src="/../public/medalBronze.png"
                         alt="Bootstrap"
@@ -58,7 +58,7 @@ export default function Leaderboard() {
                         width="32"
                         height="30"
                       />
-                    </>
+                    </div>
                   ) : (
                     <></>
                   )}
