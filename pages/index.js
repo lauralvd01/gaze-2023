@@ -231,7 +231,12 @@ export default function Home({ beers }) {
                     afficher le graphique
                   </button>
                 </a>
-                <Leaderboard/>
+                <Link href="event_create">
+                  <button type="button" className="btn inner_button m-2">
+                    ajouter un événement
+                  </button>
+                </Link>
+                <Leaderboard />
                 <FormModal
                   isOpen={openModal}
                   onClose={() => setOpenModal(false)}
@@ -300,13 +305,13 @@ export default function Home({ beers }) {
 
           <div>
             {beers ? (
-              <BeerBoxes2 
+              <BeerBoxes2
                 beers={beers}
                 prefilledBeer={prefilledBeer}
                 setPrefilledBeer={setPrefilledBeer}
                 userId={userSession ? userSession.id : null}
               />
-              ) : null}
+            ) : null}
           </div>
           {/* <button onClick={() => console.log(userSession)}>test</button> */}
         </div>
