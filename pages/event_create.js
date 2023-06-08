@@ -54,7 +54,7 @@ const Event = () => {
         />
       </Head>
       <main>
-        <a href="/index">
+        <a href="/">
           <button type="button" className="btn inner_button m-3 left">
             Retour
           </button>

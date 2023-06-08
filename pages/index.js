@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
 import Layout from "../components/layout";
 import Leaderboard from "@/components/leaderboard";
+import Event from "@/components/event";
 // import Leaderboard as l2 from "@/components/Leaderboard";
 import { useUser } from "@supabase/auth-helpers-react";
 // Simon
@@ -171,6 +172,25 @@ export default function Home({ beers }) {
       });
   };
 
+  const events = [
+    {
+      title: "Open Chibrat",
+      day: "Mercredi",
+      begining: "2023-06-07 20:00:00",
+      end: "2023-06-08 08:00:00",
+      details: "Objectif : défoncer le plafond",
+      participants: 24,
+    },
+    {
+      title: "Open Chibrat",
+      day: "Mercredi",
+      begining: "2023-06-07 20:00:00",
+      end: "2023-06-08 08:00:00",
+      details: "Objectif : défoncer le plafond",
+      participants: 24,
+    }
+  ];
+
   return (
     <Layout>
       <Head>
@@ -249,7 +269,7 @@ export default function Home({ beers }) {
                 </em>
               </p>
               <div className="right">
-                <a href="/index">
+                <a href="/">
                   <button type="button" className="btn inner_button m-2">
                     Mes statistiques
                   </button>
@@ -265,11 +285,12 @@ export default function Home({ beers }) {
                 Créer un évènement
               </button>
             </a>
+            <Event events={events} userId={userSession ? userSession.id : null} />
             <p>
               <em>À faire : component évènement</em>
             </p>
             <div className="right">
-              <a href="/index">
+              <a href="/">
                 <button type="button" className="btn display">
                   Voir tous les évènements
                 </button>
