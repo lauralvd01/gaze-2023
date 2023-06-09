@@ -15,7 +15,8 @@ async function signInWithEmailAndPassword(supabaseClient, email, password) {
   });
   console.log(data);
 
-  window.location.replace("http://localhost:3000/");
+  // window.location.replace("http://localhost:3000/");
+  window.location.replace("/");
 }
 
 async function updateDatabase(supabaseClient, username, weight, gender) {
@@ -65,7 +66,8 @@ async function signUpWithEmailAndPassword(
     }
   }
 
-  window.location.replace("http://localhost:3000/");
+  // window.location.replace("http://localhost:3000/");
+  window.location.replace("/");
 }
 
 export default function Login() {
