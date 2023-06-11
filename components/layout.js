@@ -1,8 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import Link from 'next/link'
-
+import Link from "next/link";
 
 // import Image from 'next/image';
 // import styles from './layout.module.css';
@@ -31,7 +30,7 @@ export default function Layout({ children }) {
               <div className="float-start">
                 <Link className="navbar-brand pb-2" href="/">
                   <Image
-                    src="/../public/biere-petite.png"
+                    src="/biere-petite.png"
                     alt="PA=anus"
                     width="50"
                     height="50"
@@ -92,7 +91,10 @@ export default function Layout({ children }) {
       </main>
       <footer className="shadow">
         <div className="container">
-          <p className="warning"> Attention l&apos;abus d&apos;alcool est dangereux pour la santé !</p>
+          <p className="warning">
+            {" "}
+            Attention l&apos;abus d&apos;alcool est dangereux pour la santé !
+          </p>
           <div className="row">
             <div className="col">
               <div className="container">
