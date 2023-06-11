@@ -137,6 +137,9 @@ export const Update_user = async (id, userId) => {
 };
 
 export default function Home({ beers }) {
+  // Events
+  const [events, setEvents] = useState([]);
+
   const [openModal, setOpenModal] = useState(false);
   const [prefilledBeer, setPrefilledBeer] = useState("Chouffe"); // TODO : set to null
   const userSession = useUser();
@@ -162,6 +165,17 @@ export default function Home({ beers }) {
     }
   }, [userSession]);
 
+  // Retrieve events
+  useEffect(() => {
+    supabase
+      .from("event")
+      .select("id,title,begining,end,details,participants")
+      .then((result) => {
+        setEvents(result.data);
+        console.log(result.data);
+      });
+  }, []);
+
   // <button onClick={handleList}>List drink history in console</button>
   const handleList = () => {
     supabase
@@ -172,7 +186,7 @@ export default function Home({ beers }) {
       });
   };
 
-  const events = [
+  const sampleEvents = [
     {
       title: "Open Chibrat",
       day: "Mercredi",
@@ -188,7 +202,7 @@ export default function Home({ beers }) {
       end: "2023-06-08 08:00:00",
       details: "Objectif : défoncer le plafond",
       participants: 24,
-    }
+    },
   ];
 
   return (
@@ -205,7 +219,7 @@ export default function Home({ beers }) {
         />
       </Head>
       <main>
-        {/* <a href="chart2">
+        {/* <Link href="chart2">
           <button type="button" className="btn inner_button m-2">
             afficher le graphique 
           </button>
@@ -226,11 +240,11 @@ export default function Home({ beers }) {
                 >
                   j'ai bu ...
                 </button>
-                <a href="chart2">
+                <Link href="chart2">
                   <button type="button" className="btn inner_button m-2">
                     afficher le graphique
                   </button>
-                </a>
+                </Link>
                 <Link href="event_create">
                   <button type="button" className="btn inner_button m-2">
                     ajouter un événement
@@ -274,32 +288,33 @@ export default function Home({ beers }) {
                 </em>
               </p>
               <div className="right">
-                <a href="/">
+                <Link href="/">
                   <button type="button" className="btn inner_button m-2">
                     Mes statistiques
                   </button>
-                </a>
+                </Link>
               </div>
             </div>
           ) : null}
 
           <div className="container events">
             <h3>Evènements à venir</h3>
-            <a href="/event_create">
+            <Link href="/event_create">
               <button type="button" className="btn inner_button m-2 right">
                 Créer un évènement
               </button>
-            </a>
-            <Event events={events} userId={userSession ? userSession.id : null} />
+            </Link>
+            <Event events={events}></Event>
+            <Event events={sampleEvents}></Event>
             <p>
               <em>À faire : component évènement</em>
             </p>
             <div className="right">
-              <a href="/">
+              <Link href="/">
                 <button type="button" className="btn display">
                   Voir tous les évènements
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
 
