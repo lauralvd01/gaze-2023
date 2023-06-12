@@ -33,7 +33,7 @@ export default function Leaderboard() {
                   {index == 0 ? (
                     <div key={0}>
                       <Image
-                        src="/../public/medalGold.png"
+                        src="/medalGold.png"
                         alt="Bootstrap"
                         className="medalImage"
                         width="32"
@@ -43,7 +43,7 @@ export default function Leaderboard() {
                   ) : index == 1 ? (
                     <div key={1}>
                       <Image
-                        src="/../public/medalSilver.png"
+                        src="/medalSilver.png"
                         alt="Bootstrap"
                         className="medalImage"
                         width="32"
@@ -53,7 +53,7 @@ export default function Leaderboard() {
                   ) : index == 2 ? (
                     <div key={2}>
                       <Image
-                        src="/../public/medalBronze.png"
+                        src="/medalBronze.png"
                         alt="Bootstrap"
                         className="medalImage"
                         width="32"
