@@ -310,7 +310,7 @@ export default function Login() {
       </div>
       <Link href="/">
         <Image
-          src="/../public/fire-exit.png"
+          src="/fire-exit.png"
           className={style.exit_image}
           alt="Bootstrap"
           width="60"
