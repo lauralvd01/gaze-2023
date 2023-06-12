@@ -123,7 +123,7 @@ export default function Profile() {
                                 >
                                   <div className="form-check">
                                     <input
-                                      checked={gender === "female"}
+                                      defaultChecked={gender === "female"}
                                       className="form-check-input "
                                       type="radio"
                                       name="flexRadioDefault"
@@ -136,7 +136,7 @@ export default function Profile() {
                                   </div>
                                   <div className="form-check">
                                     <input
-                                      checked={gender === "male"}
+                                      defaultChecked={gender === "male"}
                                       className="form-check-input"
                                       type="radio"
                                       name="flexRadioDefault"
