@@ -304,8 +304,14 @@ export default function Home({ beers }) {
                 Créer un évènement
               </button>
             </Link>
-            <Event events={events}></Event>
-            <Event events={sampleEvents}></Event>
+            <Event
+              events={events}
+              userId={userSession ? userSession.id : null}
+            ></Event>
+            <Event
+              events={sampleEvents}
+              userId={userSession ? userSession.id : null}
+            ></Event>
             <p>
               <em>À faire : component évènement</em>
             </p>

@@ -29,6 +29,7 @@ import { supabase } from "@/lib/supabaseClient";
 import ComputeDegreesOfUsers from "@/usefultools/ComputeDegreesOfUsers";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Page() {
   const [userIds, setUserIds] = useState([]);
@@ -60,6 +61,11 @@ export default function Page() {
           ? "Fetching ..."
           : userIds.map((userId) => <li key={userId}>{userId}</li>)}
       </ul> */}
+      <Link href="/">
+        <button type="button" className="btn chart_button m-2">
+          Retour
+        </button>
+      </Link>
       {data ? (
         <Line data={data} width={100} height={40} options={chart_options} />
       ) : (
