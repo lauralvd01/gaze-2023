@@ -63,6 +63,11 @@ async function signUpWithEmailAndPassword(
         .from("profiles")
         .update({ username: username, weight: weight, gender: gender })
         .eq("id", userId);
+
+      const {} = await supabase
+        .from("drink_history_v2")
+        .update({ drink_acts: [] })
+        .eq("user_id", userId);
     }
   }
 

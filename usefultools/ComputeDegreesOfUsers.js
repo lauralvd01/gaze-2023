@@ -2,13 +2,14 @@ import { supabase } from "../lib/supabaseClient";
 import { DateTomillis } from "./MillisDateConversion";
 
 // Time should be in milliseconds, and it should later on not be used (genre le serveur calculera de temps en temps, à l'instant t)
-const ComputeAllDegree = async () => {
+const ComputeDegreesOfUsers = async (userIds) => {
   let data = {};
 
   const RetrieveDrinkHistory = async () => {
     const { data: history } = await supabase
       .from("drink_history_v2")
-      .select("user_id,drink_acts");
+      .select("user_id,drink_acts")
+      .in("user_id", userIds);
     return history;
   };
   const RetrieveDrinkActs = async () => {
@@ -16,9 +17,7 @@ const ComputeAllDegree = async () => {
     return drink_acts;
   };
   const RetrieveBeers = async () => {
-    const { data: beers } = await supabase
-      .from("beers")
-      .select("name,degree,litrage");
+    const { data: beers } = await supabase.from("beers").select("name,degree");
     return beers;
   };
   const RetrieveProfiles = async () => {
@@ -58,15 +57,14 @@ const ComputeAllDegree = async () => {
             m * 5 * 60 * 1000 -
             DateTomillis(drink_act.drank_at);
 
-          const beer = beers.find((beer) => beer.name === drink_act.beer_name);
+          const beer_degree = beers.find(
+            (beer) => beer.name === drink_act.beer_name
+          ).degree;
 
           let degreeContribution =
-            (beer.degree *
-              0.01 *
-              drink_act.glasses_amount *
-              beer.litrage *
-              0.8) /
+            (beer_degree * 0.01 * drink_act.glasses_amount * 125 * 0.8) /
             (profile.weight * (profile.gender === "male" ? 0.7 : 0.6));
+
           if (timeSinceDrink < 0) {
             degreeContribution = 0;
             // Before peak, climb linearly
@@ -110,4 +108,4 @@ const ComputeAllDegree = async () => {
   return data;
 };
 
-export default ComputeAllDegree;
+export default ComputeDegreesOfUsers;

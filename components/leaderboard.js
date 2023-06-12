@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 export default function Leaderboard() {
   const [degrees, setDegrees] = useState([]);
 
+
   useEffect(() => {
     const LogDegrees = async () => {
       const degrees = await ComputeCurrentDegree();
@@ -70,4 +71,5 @@ export default function Leaderboard() {
       </ul>
     </div>
   );
+
 }

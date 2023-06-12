@@ -16,7 +16,9 @@ const ComputeCurrentDegree = async () => {
     return drink_acts;
   };
   const RetrieveBeers = async () => {
-    const { data: beers } = await supabase.from("beers").select("name,degree");
+    const { data: beers } = await supabase
+      .from("beers")
+      .select("name,degree,litrage");
     return beers;
   };
   const RetrieveProfiles = async () => {
@@ -49,12 +51,10 @@ const ComputeCurrentDegree = async () => {
         const timeSinceDrink =
           Date.now() + 2000 * 60 * 60 - DateTomillis(drink_act.drank_at);
 
-        const beer_degree = beers.find(
-          (beer) => beer.name === drink_act.beer_name
-        ).degree;
+        const beer = beers.find((beer) => beer.name === drink_act.beer_name);
 
         let degreeContribution =
-          (beer_degree * 0.01 * drink_act.glasses_amount * 125 * 0.8)/
+          (beer.degree * 0.01 * drink_act.glasses_amount * beer.litrage * 0.8) /
           (profile.weight * (profile.gender === "male" ? 0.7 : 0.6));
 
         if (timeSinceDrink < 0) {

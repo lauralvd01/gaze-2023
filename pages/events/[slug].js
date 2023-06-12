@@ -1,51 +1,77 @@
+// 1. Import controllers, elements, etc. which you'll use
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from "chart.js";
+import { useEffect } from "react";
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
+// Il faut que cette ligne soit après le register
+import { Bar, Line, Scatter, Bubble } from "react-chartjs-2";
+import { chart_options } from "@/usefultools/usefulVariables";
+
 import { supabase } from "@/lib/supabaseClient";
+import ComputeDegreesOfUsers from "@/usefultools/ComputeDegreesOfUsers";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { ChartOfUsers } from "../chart2";
+import { useState } from "react";
+import Link from "next/link";
 
-export default function Chart() {
+export default function Page() {
   const [userIds, setUserIds] = useState([]);
-  const [chart, setChart] = useState(null);
-  const router = useRouter();
-
-  const RetrieveUsers = async () => {
-    console.log("RetrieveUsers");
-    console.log("slug", router.query.slug);
-    try {
-      const { data: users, error } = await supabase
-        .from("participants")
-        .select("participant")
-        .eq("event", router.query.slug);
-      if (error) {
-        console.error("Error retrieving users:", error);
-        // Handle the error here (e.g., display an error message)
-        return null;
-      }
-      console.log("users", users);
-      setUserIds(users.map((user) => user.participant));
-      return users;
-    } catch (error) {
-      console.error("An error occurred:", error);
-      return null;
-    }
-  };
+  const [data, setData] = useState(); // Les données du chart
 
   useEffect(() => {
-    console.log("useEffect_____________");
-    RetrieveUsers().then((result) => {
-      setUserIds(result.map((user) => user.participant));
-      console.log(result.map((user) => user.participant));
-      console.log("_____");
-      ChartOfUsers(userIds).then((result) => {
-        setChart(result);
+    supabase
+      .from("participants")
+      .select("participant")
+      .eq("event", router.query.slug)
+      .then((data) => {
+        console.log("data", data.data);
+        let id_objects = data.data.map((obj) => obj.participant);
+        setUserIds(id_objects);
+        console.log("userIds", userIds);
+        console.log("idobj", id_objects);
+
+        ComputeDegreesOfUsers(id_objects).then((result) => {
+          setData(result);
+        });
       });
-    });
   }, []);
 
+  const router = useRouter();
   return (
     <div>
-      {userIds ? "users fetched !" : "Fetching ..."}
-      {chart ? chart : "Fetching chart ..."}
+      {/* <ul>
+        {userIds.length === 0
+          ? "Fetching ..."
+          : userIds.map((userId) => <li key={userId}>{userId}</li>)}
+      </ul> */}
+      <Link href="/">
+        <button type="button" className="btn chart_button m-2">
+          Retour
+        </button>
+      </Link>
+      {data ? (
+        <Line data={data} width={100} height={40} options={chart_options} />
+      ) : (
+        "Fetching data ..."
+      )}{" "}
+
     </div>
   );
 }

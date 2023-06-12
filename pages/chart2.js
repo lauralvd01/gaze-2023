@@ -30,7 +30,8 @@ import { useState } from "react";
 import ComputeDegree from "@/usefultools/ComputeDegree";
 import ComputeAllDegree from "@/usefultools/ComputeAllDegrees";
 import { DelayedDate } from "@/usefultools/MillisDateConversion";
-import Link from 'next/link'
+
+import Link from "next/link";
 
 
 const Chart = () => {

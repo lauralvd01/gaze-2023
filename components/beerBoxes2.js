@@ -14,8 +14,12 @@ export default function BeerBoxes2({
   return (
     <div className="container">
       <div className="row beer_row">
+
+    
+  
         {beers.map((beer, index) => (
           <div className="col col-lg-2 col-6" key={index}>
+
             <div className="card beer_card">
               <div className="card-header">
                 <div className="card-img-top beer_img">
@@ -26,7 +30,10 @@ export default function BeerBoxes2({
               <div className="card-body">
                 <p className="card-text">Degré : {beer.degree}</p>
                 <p className="card-text">Prix : {beer.price} €</p>
+
+
                 <p className="card-text">Quantité : {beer.litrage}</p>
+
                 <p className="card-text">
                   Prix / Degré.L :{" "}
                   {Math.floor(
@@ -60,7 +67,12 @@ export default function BeerBoxes2({
                   <FormModal.Header>Nouvelle consommation</FormModal.Header>
                   <FormModal.Body>
                     {/* Modal Body */}
-                    <Form_v2 prefilledBeer={prefilledBeer} />{" "}
+
+                    <Form_v2
+                      prefilledBeer={prefilledBeer}
+                      prefilledGlass={true}
+                    />{" "}
+
                     {/* Use Form to see previous version */}
                   </FormModal.Body>
                   <FormModal.Footer>
@@ -88,7 +100,10 @@ export default function BeerBoxes2({
 }
 
 const MyImage = ({ id }) => {
+
+  
   let impath = "/beers/".concat(id).concat(".png");
+
   return (
     <Image
       src={impath}

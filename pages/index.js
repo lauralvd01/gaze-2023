@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
 import Layout from "../components/layout";
 import Leaderboard from "@/components/leaderboard";
+import Event from "@/components/event";
 // import Leaderboard as l2 from "@/components/Leaderboard";
 import { useUser } from "@supabase/auth-helpers-react";
 // Simon
@@ -118,11 +119,14 @@ export const handleSave = async (userId) => {
 
 export const Update_user = async (id, userId) => {
   try {
-    const { data: user_history } = await supabase
+    console.log("ici", userId);
+    const { data: user_history, error } = await supabase
       .from("drink_history_v2")
       .select()
-      .match({ user_id: userId })
+      .eq("user_id", userId)
       .single();
+
+    console.log("la");
 
     // console.log(user_history);
     const updated_drink_history = user_history.drink_acts.concat(id); // crochets pour concatener ?
@@ -137,6 +141,9 @@ export const Update_user = async (id, userId) => {
 };
 
 export default function Home({ beers }) {
+  // Events
+  const [events, setEvents] = useState([]);
+
   const [openModal, setOpenModal] = useState(false);
   const [prefilledBeer, setPrefilledBeer] = useState("Chouffe"); // TODO : set to null
   const userSession = useUser();
@@ -162,6 +169,17 @@ export default function Home({ beers }) {
     }
   }, [userSession]);
 
+  // Retrieve events
+  useEffect(() => {
+    supabase
+      .from("event")
+      .select("id,title,begining,end,details,participants")
+      .then((result) => {
+        setEvents(result.data);
+        console.log(result.data);
+      });
+  }, []);
+
   // <button onClick={handleList}>List drink history in console</button>
   const handleList = () => {
     supabase
@@ -171,6 +189,25 @@ export default function Home({ beers }) {
         console.log(result.data);
       });
   };
+
+  const sampleEvents = [
+    {
+      title: "Open Chibrat",
+      day: "Mercredi",
+      begining: "2023-06-07 20:00:00",
+      end: "2023-06-08 08:00:00",
+      details: "Objectif : défoncer le plafond",
+      participants: 24,
+    },
+    {
+      title: "Open Chibrat",
+      day: "Mercredi",
+      begining: "2023-06-07 20:00:00",
+      end: "2023-06-08 08:00:00",
+      details: "Objectif : défoncer le plafond",
+      participants: 24,
+    },
+  ];
 
   return (
     <Layout>
@@ -186,7 +223,7 @@ export default function Home({ beers }) {
         />
       </Head>
       <main>
-        {/* <a href="chart2">
+        {/* <Link href="chart2">
           <button type="button" className="btn inner_button m-2">
             afficher le graphique 
           </button>
@@ -211,8 +248,17 @@ export default function Home({ beers }) {
                   <button type="button" className="btn inner_button m-2">
                     afficher le graphique
                   </button>
+
+
                 </Link>
-                <Leaderboard/>
+                <Link href="event_create">
+                  <button type="button" className="btn inner_button m-2">
+                    ajouter un événement
+                  </button>
+                </Link>
+
+                <Leaderboard />
+
                 <FormModal
                   isOpen={openModal}
                   onClose={() => setOpenModal(false)}
@@ -250,7 +296,9 @@ export default function Home({ beers }) {
                 </em>
               </p>
               <div className="right">
-                <Link href="/index">
+            
+                <Link href="/">
+            
                   <button type="button" className="btn inner_button m-2">
                     Mes statistiques
                   </button>
@@ -261,11 +309,26 @@ export default function Home({ beers }) {
 
           <div className="container events">
             <h3>Evènements à venir</h3>
+            <Link href="/event_create">
+              <button type="button" className="btn inner_button m-2 right">
+                Créer un évènement
+              </button>
+            </Link>
+            <Event
+              events={events}
+              userId={userSession ? userSession.id : null}
+            ></Event>
+            <Event
+              events={sampleEvents}
+              userId={userSession ? userSession.id : null}
+            ></Event>
             <p>
               <em>À faire : component évènement</em>
             </p>
             <div className="right">
-              <Link href="/index">
+              
+              <Link href="/">
+
                 <button type="button" className="btn display">
                   Voir tous les évènements
                 </button>
@@ -275,13 +338,13 @@ export default function Home({ beers }) {
 
           <div>
             {beers ? (
-              <BeerBoxes2 
+              <BeerBoxes2
                 beers={beers}
                 prefilledBeer={prefilledBeer}
                 setPrefilledBeer={setPrefilledBeer}
                 userId={userSession ? userSession.id : null}
               />
-              ) : null}
+            ) : null}
           </div>
           {/* <button onClick={() => console.log(userSession)}>test</button> */}
         </div>
