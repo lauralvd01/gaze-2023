@@ -118,11 +118,14 @@ export const handleSave = async (userId) => {
 
 export const Update_user = async (id, userId) => {
   try {
-    const { data: user_history } = await supabase
+    console.log("ici", userId);
+    const { data: user_history, error } = await supabase
       .from("drink_history_v2")
       .select()
-      .match({ user_id: userId })
+      .eq("user_id", userId)
       .single();
+
+    console.log("la");
 
     // console.log(user_history);
     const updated_drink_history = user_history.drink_acts.concat(id); // crochets pour concatener ?
@@ -244,12 +247,14 @@ export default function Home({ beers }) {
                   <button type="button" className="btn inner_button m-2">
                     afficher le graphique
                   </button>
+
                 </Link>
                 <Link href="event_create">
                   <button type="button" className="btn inner_button m-2">
                     ajouter un événement
                   </button>
                 </Link>
+
                 <Leaderboard />
                 <FormModal
                   isOpen={openModal}
