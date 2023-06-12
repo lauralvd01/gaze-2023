@@ -198,3 +198,7 @@ footer {
 .row.beer_row .card-text {
   margin-bottom: 2px;
 }
+
+.btn.beer_button.m-2.eventbutton {
+  font-size: 95%;
+}

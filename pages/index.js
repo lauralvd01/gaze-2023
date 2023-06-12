@@ -303,16 +303,22 @@ export default function Home({ beers }) {
           ) : null}
 
           <div className="container events">
-            <h3>Evènements à venir</h3>
-            <Link href="/event_create">
-              <button type="button" className="btn inner_button m-2 right">
-                Créer un évènement
-              </button>
-            </Link>
-            <Event
-              events={events}
-              userId={userSession ? userSession.id : null}
-            ></Event>
+            <div className="container">
+              <h3>Evènements à venir</h3>
+              <Link href="/event_create">
+                <button type="button" className="btn inner_button m-2">
+                  Créer un évènement
+                </button>
+              </Link>
+            </div>
+
+            <div className="container">
+              <Event
+                events={events}
+                userId={userSession ? userSession.id : null}
+              />
+            </div>
+
             {/* <Event
               events={sampleEvents}
               userId={userSession ? userSession.id : null}

@@ -14,12 +14,8 @@ export default function BeerBoxes2({
   return (
     <div className="container">
       <div className="row beer_row">
-
-    
-  
         {beers.map((beer, index) => (
           <div className="col col-lg-2 col-6" key={index}>
-
             <div className="card beer_card">
               <div className="card-header">
                 <div className="card-img-top beer_img">

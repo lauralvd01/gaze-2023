@@ -67,7 +67,7 @@ export default function Event({ events, userId }) {
     <div className="container">
       <div className="row beer_row">
         {events.map((event) => (
-          <div key={event.id} className="col col-lg-2 col-6">
+          <div className="col col-lg-2 col-6" key={event.id}>
             <div className="card beer_card">
               <div className="card-header">
                 <h5 className="card-title left">
@@ -88,7 +88,7 @@ export default function Event({ events, userId }) {
                 </h5>
               </div>
               <div className="card-body">
-                <h4 className="card-title center">{event.title}</h4>
+                <h5 className="card-title center">{event.title}</h5>
                 <p className="card-text right">
                   Participants :{" "}
                   {/* {console.log("eventsParticipants", eventsParticipants)} */}
@@ -100,7 +100,7 @@ export default function Event({ events, userId }) {
               </div>
               <div className="card-footer">
                 <button
-                  className="btn beer_button m-2"
+                  className="btn beer_button m-2 eventbutton"
                   onClick={() => {
                     let detailsMarkup = document.getElementById(
                       event.id + "-details"
@@ -117,7 +117,7 @@ export default function Event({ events, userId }) {
                 <p id={event.id + "-details"} style={{ marginBottom: 0 }}></p>
 
                 <button
-                  className="btn beer_button m-2"
+                  className="btn beer_button m-2 eventbutton"
                   onClick={() => {
                     // LEAVE EVENT
                     if (eventsThatIJoined.includes(event.id)) {
@@ -243,7 +243,7 @@ export default function Event({ events, userId }) {
                 </button>
                 <Link
                   href={"/events/" + event.id}
-                  className="btn beer_button m-2"
+                  className="btn beer_button m-2 eventbutton"
                 >
                   Aller
                 </Link>
