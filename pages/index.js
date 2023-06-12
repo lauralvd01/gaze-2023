@@ -21,6 +21,7 @@ import { fontStyle } from "@mui/system";
 import BeerBoxes from "@/components/BeerBoxes";
 import BeerBoxes2 from "@/components/beerBoxes2";
 
+
 function uuidv4() {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
     (
@@ -241,12 +242,13 @@ export default function Home({ beers }) {
                   className="btn inner_button m-2"
                   onClick={() => setOpenModal(!openModal)}
                 >
-                  j'ai bu ...
+                  j&apos;ai bu ...
                 </button>
                 <Link href="chart2">
                   <button type="button" className="btn inner_button m-2">
                     afficher le graphique
                   </button>
+
 
                 </Link>
                 <Link href="event_create">
@@ -256,6 +258,7 @@ export default function Home({ beers }) {
                 </Link>
 
                 <Leaderboard />
+
                 <FormModal
                   isOpen={openModal}
                   onClose={() => setOpenModal(false)}
@@ -293,7 +296,9 @@ export default function Home({ beers }) {
                 </em>
               </p>
               <div className="right">
+            
                 <Link href="/">
+            
                   <button type="button" className="btn inner_button m-2">
                     Mes statistiques
                   </button>
@@ -321,7 +326,9 @@ export default function Home({ beers }) {
               <em>À faire : component évènement</em>
             </p>
             <div className="right">
+              
               <Link href="/">
+
                 <button type="button" className="btn display">
                   Voir tous les évènements
                 </button>

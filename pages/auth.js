@@ -1,5 +1,5 @@
 import React from "react";
-import supabase from "../lib/supabaseClient";
+import supabase from "../lib/supabaseClient.js";
 import { useState } from "react";
 
 async function signInWithEmail() {

@@ -5,6 +5,7 @@ import { supabase } from "../lib/supabaseClient";
 import { createClient } from "@supabase/supabase-js";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 async function signInWithEmailAndPassword(supabaseClient, email, password) {
   console.log("signing in with email and password");
@@ -14,7 +15,8 @@ async function signInWithEmailAndPassword(supabaseClient, email, password) {
   });
   console.log(data);
 
-  window.location.replace("http://localhost:3000/");
+  // window.location.replace("http://localhost:3000/");
+  window.location.replace("/");
 }
 
 async function updateDatabase(supabaseClient, username, weight, gender) {
@@ -69,7 +71,8 @@ async function signUpWithEmailAndPassword(
     }
   }
 
-  window.location.replace("http://localhost:3000/");
+  // window.location.replace("http://localhost:3000/");
+  window.location.replace("/");
 }
 
 export default function Login() {
@@ -305,7 +308,7 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <a href="/">
+      <Link href="/">
         <Image
           src="/../public/fire-exit.png"
           className={style.exit_image}
@@ -313,7 +316,7 @@ export default function Login() {
           width="60"
           height="60"
         />
-      </a>
+      </Link>
     </div>
   );
 }

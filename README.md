@@ -1,3 +1,20 @@
+## Gazification
+
+Gazification is a web app designed to evaluate one's blood alcohol level in order to help our school associative bar to detect students that are too drunk and stop giving them alcoholic beverages. This app is part of a school project of four engineering students in computer science for their Advanved Software Engineering class.
+It was developped using React Next framework, and using Supabase to handle the database, that is the accounst, beverages and "drink acts" management.
+
+Students of our school can create an account, giving their username, gender, and weight. They can then add the drink they had on the app. All the beers available in our bar are already in the app, so we know exactly the alcohol content and the size of the bottles, and we can accurately calculate their alcohol level at each point in time. Everyone can see its own alcohol level. 
+
+The app is designed for users that are not the bar, because we need them to be honest on what they drink, which would not be the case if they were not attracted to the site. Therefore, it is fully responsive and adapted for phones. users can also create "parties" where they can invite people to join, and see each other's blood alcohol level. All this data is then sent to the database and available to the bar.
+
+
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

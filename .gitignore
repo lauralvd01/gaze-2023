@@ -31,5 +31,5 @@ yarn-error.log*
 # vercel
 .vercel
 
-#lib
-/lib
+# #lib
+# /lib

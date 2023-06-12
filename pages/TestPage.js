@@ -1,41 +1,47 @@
-// NB : cette page ne sert a r en fait
-
+import { supabase } from "@/lib/supabaseClient";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-// import { useRouter } from "next/router";
-import { supabase } from "../lib/supabaseClient";
 
-export default function TestPage() {
-  //   const router = useRouter();
+function Posts({ posts }) {
+  // TODO : remplacer le slug par l'id de l'event --> check
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    // retrieve events
-    supabase
-      .from("event")
-      .select("*")
-      .then((data) => {
-        console.log("data", data);
-        setEvents(data.data);
-      });
+    // NB : c'est pas une bonne façon de faire comme ça mais pg
+    const RetrieveEvents = async () => {
+      const { data: events, error } = await supabase
+        .from("event")
+        .select("id,title,participants");
+
+      if (error) {
+        console.error("Error retrieving events:", error);
+        return;
+      }
+      setEvents(events);
+    };
+    RetrieveEvents();
+    console.log("events retrieved");
   }, []);
+
+  const addSlugToEvent = (event) => {
+    event.slug = event.id;
+    return event;
+  };
 
   return (
     <ul>
-      {events.length !== 0
-        ? events.map((post) => (
+      <button onClick={() => console.log(events)}>aa</button>
+      {events.length === 0
+        ? "Fetching events ..."
+        : events.map(addSlugToEvent).map((post) => (
             <li key={post.id}>
-              <Link
-                href={{
-                  pathname: "/events/[slug]",
-                  query: { slug: post.id },
-                }}
-              >
-                {post.title} - {post.participants}
+              <Link href={`/events/${encodeURIComponent(post.slug)}`}>
+                <b>{post.title}</b> - {post.participants} participants
               </Link>
             </li>
-          ))
-        : "Fetching ..."}
+          ))}
     </ul>
   );
 }
+
+export default Posts;

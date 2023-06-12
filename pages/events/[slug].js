@@ -71,6 +71,7 @@ export default function Page() {
       ) : (
         "Fetching data ..."
       )}{" "}
+
     </div>
   );
 }

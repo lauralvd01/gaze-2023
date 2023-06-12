@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import Link from "next/link";
 
 // import Image from 'next/image';
 // import styles from './layout.module.css';
@@ -27,21 +28,21 @@ export default function Layout({ children }) {
           <div className="container-fluid">
             <div className="container">
               <div className="float-start">
-                <a className="navbar-brand pb-2" href="/">
+                <Link className="navbar-brand pb-2" href="/">
                   <Image
-                    src="/../public/biere-petite.png"
+                    src="/biere-petite.png"
                     alt="PA=anus"
                     width="50"
                     height="50"
                   />
-                </a>
+                </Link>
               </div>
               <div className="float-start">
-                <a className="navbar-brand" href="/">
+                <Link className="navbar-brand" href="/">
                   <span className={style.noir}>Gaz</span>
                   <span className={style.jaune}>EDI</span>
                   <span className={style.rouge}>fication</span>
-                </a>
+                </Link>
               </div>
               {/* <button
                 className="navbar-toggler"
@@ -60,18 +61,18 @@ export default function Layout({ children }) {
               </ul>
             </div> */}
             {!user ? (
-              <a href="/login">
+              <Link href="/login">
                 <button type="button" className="btn loggin_button m-2">
                   se connecter/créer un compte
                 </button>
-              </a>
+              </Link>
             ) : (
               <>
-                <a href="/profile">
+                <Link href="/profile">
                   <button type="button" className="btn loggin_button m-2">
                     Profil
                   </button>
-                </a>
+                </Link>
                 <button
                   type="button"
                   className="btn loggin_button m-2"
@@ -90,7 +91,10 @@ export default function Layout({ children }) {
       </main>
       <footer className="shadow">
         <div className="container">
-          <p className="warning"> Attention l'abus d'alcool est dangereux pour la santé !</p>
+          <p className="warning">
+            {" "}
+            Attention l&apos;abus d&apos;alcool est dangereux pour la santé !
+          </p>
           <div className="row">
             <div className="col">
               <div className="container">
@@ -103,18 +107,18 @@ export default function Layout({ children }) {
             </div>
             <div className="col">
               <div className="container">
-                <a className="navbar-brand" href="/">
+                <Link className="navbar-brand" href="/">
                   <p>Home</p>
-                </a>
-                <a className="navbar-brand" href="/login">
+                </Link>
+                <Link className="navbar-brand" href="/login">
                   <p>Login</p>
-                </a>
-                <a
+                </Link>
+                <Link
                   className="navbar-brand"
                   href="https://github.com/lauralvd01/gaze-2023"
                 >
                   <p>Github du projet</p>
-                </a>
+                </Link>
                 <p> Merci pour votre visite, à bientôt !</p>
               </div>
             </div>
