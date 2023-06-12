@@ -2,18 +2,20 @@ import Image from "next/image";
 import ComputeCurrentDegree from "@/usefultools/ComputeCurrentDegree";
 import { useState, useEffect } from "react";
 
-export default function Leaderboard(){
-    const [degrees, setDegrees] = useState([]);
+export default function Leaderboard() {
+  const [degrees, setDegrees] = useState([]);
 
-    useEffect(() => {
-      const LogDegrees = async () => {
-        const degrees = await ComputeCurrentDegree();
-        setDegrees(degrees);
-      };
-      LogDegrees();
-      console.log("degrees successfully set");
-      console.log("degrees,", degrees);
-    }, []);
+  useEffect(() => {
+    const LogDegrees = async () => {
+      const degrees = await ComputeCurrentDegree();
+      setDegrees(degrees);
+    };
+    LogDegrees();
+    console.log("degrees successfully set");
+    console.log("degrees,", degrees);
+  }, []);
+
+
 
     return(
         <div className="leader_box">
