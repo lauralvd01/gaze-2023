@@ -117,11 +117,14 @@ export const handleSave = async (userId) => {
 
 export const Update_user = async (id, userId) => {
   try {
-    const { data: user_history } = await supabase
+    console.log("ici", userId);
+    const { data: user_history, error } = await supabase
       .from("drink_history_v2")
       .select()
-      .match({ user_id: userId })
+      .eq("user_id", userId)
       .single();
+
+    console.log("la");
 
     // console.log(user_history);
     const updated_drink_history = user_history.drink_acts.concat(id); // crochets pour concatener ?
@@ -211,7 +214,7 @@ export default function Home({ beers }) {
                     afficher le graphique
                   </button>
                 </a>
-                <Leaderboard/>
+                <Leaderboard />
                 <FormModal
                   isOpen={openModal}
                   onClose={() => setOpenModal(false)}
@@ -274,13 +277,13 @@ export default function Home({ beers }) {
 
           <div>
             {beers ? (
-              <BeerBoxes2 
+              <BeerBoxes2
                 beers={beers}
                 prefilledBeer={prefilledBeer}
                 setPrefilledBeer={setPrefilledBeer}
                 userId={userSession ? userSession.id : null}
               />
-              ) : null}
+            ) : null}
           </div>
           {/* <button onClick={() => console.log(userSession)}>test</button> */}
         </div>
